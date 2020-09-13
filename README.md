@@ -6,7 +6,7 @@ Behavior Trees are a fantastic way to write modular AI that can scale in complex
 ## Features
 1. **Customize the graph** by choosing the title bar color, the icon, amount to dim inactive nodes and more.
 2. **Robust debug messages** can be viewed directly on the graph. Surface anything you want to see.
-3. **Includes basic node types** to help you get up and running quickly. No need to write a sequencer, selector inverter, or more!
+3. **Includes basic node types** to help you get up and running quickly. No need to write a sequencer, selector, inverter, or more!
 
 ## What's Included?
 This package comes with:
@@ -33,7 +33,14 @@ Composites are essentially instructions for your behavior tree on how it should 
 #### Decorators
 Decorators are a way to alter how an individual node is run. These can range from changing the return status code (`Inverter`) to defining how many times to excute (`Repeater`).
 
-
+| Name      	| Description                                                                                                 	|
+|-----------	|-------------------------------------------------------------------------------------------------------------	|
+| Decorator 	| Base class for all decorator node types. Supports a single child.                                           	|
+| Inverter  	| Inverts the final result of the node - `Success` will return `Failure` and `Failure` will return `Success`. 	|
+| Repeater  	| Run the child node a specified amount of times before exiting.                                              	|
+| Succeeder 	| Returns `Running` status if running otherwise returns the `Success` status. Never the `failure` status.     	|
+| Timer     	| Run the child node a specified amount of time in seconds.                                                   	|
+| UntilFail 	| Continues to run the child node until the child returns a status of `Failure`.                              	|
 
 ## Setup
 Here are the most important things to know:
