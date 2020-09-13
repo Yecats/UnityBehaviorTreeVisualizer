@@ -18,6 +18,14 @@ This package comes with:
 ### Standard Behavior Tree Nodes
 There are 11 composite and decorator nodes that can be used in your game. Inherit from `Composite`, `Condition` and `Decorator` when creating new nodes of those types. Action/Leaf nodes can be inherited from `Node` directly.
 
+#### General
+There are two general node types:
+
+| Name      	| Description                                                                                                                                       	|
+|-----------	|---------------------------------------------------------------------------------------------------------------------------------------------------	|
+| Node      	| Base class for all node types - Everything should ultimately derive from this.                                                                    	|
+| Condition 	| Base class for all condition node types. Does not do anything special. Exists so that you can stylize all conditions in the debugger tool easily. 	|
+
 #### Composites
 Composites are essentially instructions for your behavior tree on how it should run a group of child nodes. 
 
