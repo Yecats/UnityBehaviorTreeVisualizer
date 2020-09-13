@@ -1,4 +1,6 @@
-![beta](https://img.shields.io/badge/release-beta-orange) ![GitHub issues](https://img.shields.io/github/issues/Yecats/UnityBehaviorTreeDebugger) ![version](https://img.shields.io/badge/unity%20version-2020.1.0f1%2B-blue) ![twitter](https://img.shields.io/twitter/follow/yecats131?style=social) ![Twitter](https://img.shields.io/twitter/follow/whatupgames?style=social)
+![beta](https://img.shields.io/badge/release-beta-orange) ![GitHub issues](https://img.shields.io/github/issues/Yecats/UnityBehaviorTreeDebugger) ![version](https://img.shields.io/badge/unity%20version-2020.1.0f1%2B-blue) 
+
+![twitter](https://img.shields.io/twitter/follow/yecats131?style=social) ![Twitter](https://img.shields.io/twitter/follow/whatupgames?style=social)
 
 # Unity Behavior Tree Debugger (Beta)
 Behavior Trees are a fantastic way to write modular AI that can scale in complexity. Unfortunately, it can be quite hard to visualize how your tree is being executed which makes it difficult to debug potential failure points. The Behavior Tree Debugger tool was created to solve these problems! The tool will scan for active behavior trees in your scene and group them in a drop down for easy toggle. A graph will be drawn, and nodes will light up, showing you which part of the tree is currently running. 
