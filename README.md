@@ -5,6 +5,8 @@
 # Unity Behavior Tree Debugger (Beta)
 Behavior Trees are a fantastic way to write modular AI that can scale in complexity. Unfortunately, it can be quite hard to visualize how your tree is being executed which makes it difficult to debug potential failure points. The Behavior Tree Debugger tool was created to solve these problems! The tool will scan for active behavior trees in your scene and group them in a drop down for easy toggle. A graph will be drawn, and nodes will light up, showing you which part of the tree is currently running. 
 
+> Head over to the [Wiki](wiki) for more detailed documentation.
+
 ## Features
 1. **Customize the graph** by choosing the title bar color, the icon, amount to dim inactive nodes and more.
 2. **Robust debug messages** can be viewed directly on the graph. Surface anything you want to see.
@@ -44,16 +46,5 @@ if (LastNodeStatus != nodeStatus || !m_LastStatusReason.Equals(StatusReason))
     m_LastStatusReason = StatusReason;
 }
 ```
-
-## Error Messages
-
-#### Did not find any scripts that reference IBehaviorTree. Are they in a different assembly than Assembly-CSharp?
-There are two reasons that you may encounter this error. The first is that your base node does not implement `IBehaviorTree`, and thus no references can be detected. Make sure you implmenet the interface.
-
-The second reason is that your scripts are not in the default `Assembly-CSharp` assembly. For performance reasons, the Behavior Tree Debugger only scans the default assembly for references to `IBehaviorTree`. It is possible to seperate your game into multiple assemblies and if you have done this, you will need to update the tool to include a reference to the assembly(s). This can be done in `BehaviorTreeGraphWindow.ScanProjectForTreeReferences()`. 
-
-#### Scanning only works when your game is running
-The **Scan Scene** button on the toolbar is used to scan for behavior trees actively running in your scene. You'll see this error message if you click on the button when not in play mode. 
-
 ## Credits
 1. This project uses icons from https://game-icons.net/.
