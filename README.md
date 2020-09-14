@@ -89,3 +89,6 @@ The second reason is that your scripts are not in the default `Assembly-CSharp` 
 
 #### Scanning only works when your game is running
 The **Scan Scene** button on the toolbar is used to scan for behavior trees actively running in your scene. You'll see this error message if you click on the button when not in play mode. 
+
+## Credits
+1. This project uses icons from https://game-icons.net/.
