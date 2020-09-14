@@ -17,41 +17,6 @@ This package comes with:
 2. Standard Behavior Tree nodes to get you up and running quickly
 3. Sample project to demonstrate the implementation
 
-### Standard Behavior Tree Nodes
-There are 11 composite and decorator nodes that can be used in your game. Inherit from `Composite`, `Condition` and `Decorator` when creating new nodes of those types. Action/Leaf nodes can be inherited from `Node` directly.
-
-#### General
-There are two general node types:
-
-| Name      	| Description                                                                                                                                       	|
-|-----------	|---------------------------------------------------------------------------------------------------------------------------------------------------	|
-| Node      	| Base class for all node types - Everything should ultimately derive from this.                                                                    	|
-| Condition 	| Base class for all condition node types. Does not do anything special. Exists so that you can stylize all conditions in the debugger tool easily. 	|
-
-#### Composites
-Composites are essentially instructions for your behavior tree on how it should run a group of child nodes. 
-
-| Name                 	| Description                                                                                                                                                                                                         	|
-|----------------------	|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| Composite            	| Base class for all composite node types.                                                                                                                                                                            	|
-| Selector             	| Runs each child until one of them returns status Success. Will return failure if no child runs successfully.                                                                                                        	|
-| RandomSelector       	| Shuffles the child nodes the first time the behavior tree is constructed (only once). Executes the same as `Selector`                                                                                               	|
-| AlwaysRandomSelector 	| Shuffles the child nodes every time it runs for the first time. Executes the same as `Selector`.                                                                                                                    	|
-| Sequence             	| Will continue to run if all children return the status of Running or Success. Return a status code of Failure if any children return status Failure. Returns status code of Success if all children return Success. 	|
-| RandomSequence       	| Shuffles the child nodes the first time the behavior tree is constructed (only once). Executes the same as `Sequence`.                                                                                              	|
-| AlwaysRandomSequence 	| Shuffles the child nodes every time it runs for the first time. Executes the same as `Sequence`.                                                                                                                    	|
-#### Decorators
-Decorators are a way to alter how an individual node is run. These can range from changing the return status code (`Inverter`) to defining how many times to excute (`Repeater`).
-
-| Name      	| Description                                                                                                 	|
-|-----------	|-------------------------------------------------------------------------------------------------------------	|
-| Decorator 	| Base class for all decorator node types. Supports a single child.                                           	|
-| Inverter  	| Inverts the final result of the node - `Success` will return `Failure` and `Failure` will return `Success`. 	|
-| Repeater  	| Run the child node a specified amount of times before exiting.                                              	|
-| Succeeder 	| Returns `Running` status if running otherwise returns the `Success` status. Never the `failure` status.     	|
-| Timer     	| Run the child node a specified amount of time in seconds.                                                   	|
-| UntilFail 	| Continues to run the child node until the child returns a status of `Failure`.                              	|
-
 ## Setup
 Here are the most important things to know:
 
