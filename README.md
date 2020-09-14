@@ -5,7 +5,7 @@
 # Unity Behavior Tree Debugger (Beta)
 Behavior Trees are a fantastic way to write modular AI that can scale in complexity. Unfortunately, it can be quite hard to visualize how your tree is being executed which makes it difficult to debug potential failure points. The Behavior Tree Debugger tool was created to solve these problems! The tool will scan for active behavior trees in your scene and group them in a drop down for easy toggle. A graph will be drawn, and nodes will light up, showing you which part of the tree is currently running. 
 
-> Head over to the [Wiki](wiki) for more detailed documentation.
+> Head over to the [Wiki](https://github.com/Yecats/UnityBehaviorTreeDebugger/wiki) for more detailed documentation.
 
 ## Features
 1. **Customize the graph** by choosing the title bar color, the icon, amount to dim inactive nodes and more.
