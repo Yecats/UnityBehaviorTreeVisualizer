@@ -17,6 +17,8 @@
   },
   "hideInEditor": false,
   "type": "tool",
+  "documentationUrl": "https://github.com/Yecats/UnityBehaviorTreeDebugger/wiki",
+  "licenseUrl": "https://github.com/Yecats/UnityBehaviorTreeDebugger/blob/main/LICENSE",
   "samples": [
     {
       "displayName": "Standard Nodes",

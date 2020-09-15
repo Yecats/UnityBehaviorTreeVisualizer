@@ -25,7 +25,7 @@ namespace WUG.BehaviorTreeDebugger
 
         public static SettingsData SettingsData;
         public static MiniMap MiniMap;
-        public static List<Type> ScriptsWithBehaviorTrees = new List<Type>();
+        public List<Type> ScriptsWithBehaviorTrees = new List<Type>();
 
         public static BehaviorTreeGraphView GraphView;
         private ToolbarMenu m_ActiveTreesInScene;
@@ -38,8 +38,6 @@ namespace WUG.BehaviorTreeDebugger
             Instance = GetWindow<BehaviorTreeGraphWindow>();
             Instance.titleContent = new GUIContent("Behavior Tree Debugger (Beta)");
             Instance.minSize = new Vector2(500, 500);
-
-            Instance.ScanProjectForTreeReferences();
         }
 
         private void OnEnable()
@@ -108,14 +106,18 @@ namespace WUG.BehaviorTreeDebugger
                     return;
                 }
 
+
+
                 for (int i = m_ActiveTreesInScene.menu.MenuItems().Count - 1; i == 0; i--)
                 {
                     m_ActiveTreesInScene.menu.RemoveItemAt(i);
                 }
+                
+                ScanProjectForTreeReferences();
 
-                if (ScriptsWithBehaviorTrees == null)
+                if (ScriptsWithBehaviorTrees == null || ScriptsWithBehaviorTrees.Count == 0)
                 {
-                    "Did not detect any scripts.".BTDebugLog();
+                     return;
                 }
 
                 foreach (Type script in ScriptsWithBehaviorTrees)
@@ -185,6 +187,9 @@ namespace WUG.BehaviorTreeDebugger
 
         private void ScanProjectForTreeReferences()
         {
+            ScriptsWithBehaviorTrees.Clear();
+            
+
             Assembly defaultAssembly = AppDomain.CurrentDomain.GetAssemblies().SingleOrDefault(assembly => assembly.GetName().Name == "Assembly-CSharp");
 
             ScriptsWithBehaviorTrees = defaultAssembly?.GetTypes().Where( x => x.IsClass && x.GetInterfaces().Contains(typeof(IBehaviorTree)) && x.IsSubclassOf(typeof(UnityEngine.Object))).ToList();
