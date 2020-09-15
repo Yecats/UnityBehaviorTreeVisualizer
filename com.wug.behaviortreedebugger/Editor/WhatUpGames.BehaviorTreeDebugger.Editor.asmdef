@@ -1,0 +1,15 @@
+{
+    "name": "WhatUpGames.BehaviorTreeDebugger.Editor",
+    "references": [
+        "GUID:2dd6cc2068976be4a8ca21e6105d86b0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
