@@ -29,7 +29,7 @@ Here are the most important things to know:
 3. By inheriting `NodeBase` all nodes will have the notion of child node(s). Do not add anything to the list, and it'll be ignored (and thus, treated as a leaf node). Decorators (inverter, untilfail, etc.) should only ever have one child and composites (seqencer, selector, etc.) can have as many as they need.
 
 ### Example - Call OnNodeStatusChanged only when a new status or message occurs
-1. Your base class must inherit from the `NodeBase` class and implement `IBehaviorTree`.
+1. Your base class must inherit from the `NodeBase` class.
 2. Call `OnNodeStatusChanged` event when the node's status has been changed. In my example, I call it only if the all up status has changed (i.e. `Running` to `Success`) or if the `StatusReason` has changed. Here's an example:
 
 ``` csharp
