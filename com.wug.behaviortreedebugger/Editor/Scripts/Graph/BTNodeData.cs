@@ -41,6 +41,7 @@ namespace WUG.BehaviorTreeDebugger
         {
             RuntimeNodeRef = runtimeNodeRef;
             RuntimeNodeRef.NodeStatusChanged += OnNodeStatusChanged;
+            
 
             title = RuntimeNodeRef.Name == null || RuntimeNodeRef.Name.Equals("") ? RuntimeNodeRef.GetType().Name : RuntimeNodeRef.Name;
 
@@ -95,6 +96,7 @@ namespace WUG.BehaviorTreeDebugger
 
                     m_NodeTitleContainer.Add(decoratorImage);
                     decoratorImage.SendToBack();
+
                 }
             }
 
