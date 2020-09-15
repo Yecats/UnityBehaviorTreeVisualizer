@@ -20,7 +20,7 @@ This package comes with:
 3. Sample project to demonstrate the implementation
 
 ## Setup
-To import the package into your project, you can either download the .zip from the **Releases** tab or [install through Package Manager](https://docs.unity3d.com/Manual/upm-ui-giturl.html) with this URL: https://github.com/Yecats/UnityBehaviorTreeDebugger?path=/com.wug.behaviortreedebugger. 
+To import the package into your project, you can either download the .zip from the **Releases** tab or [install through Package Manager](https://docs.unity3d.com/Manual/upm-ui-giturl.html) with this URL: https://github.com/Yecats/UnityBehaviorTreeDebugger.git?path=/com.wug.behaviortreedebugger. 
 
 Here are the most important things to know:
 
