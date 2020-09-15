@@ -15,7 +15,7 @@
                 <uie:ObjectField label="Success Icon" allow-scene-objects="false" type="UnityEngine.Sprite, UnityEngine.CoreModule" name="successIcon" style="padding-top: 5px; padding-bottom: 5px;" />
                 <uie:ObjectField label="Failure Icon" allow-scene-objects="false" type="UnityEngine.Sprite, UnityEngine.CoreModule" name="failureIcon" style="padding-top: 5px; padding-bottom: 5px;" />
             </ui:VisualElement>
-            <ui:Label text="Base Node" tooltip="High level nodes that leafs derive from. This could be &apos;Decorator&apos; or &apos;Condition&apos;. If an override does not exist then the properties will be taken from here." class="debugger-header" />
+            <ui:Label text="Default Style" tooltip="High level nodes that leafs derive from. This could be &apos;Decorator&apos; or &apos;Condition&apos;. If an override does not exist then the properties will be taken from here." class="debugger-header" />
             <ui:VisualElement name="HeaderRow" style="flex-direction: row; flex-grow: 0; padding-left: 0; padding-right: 0; border-top-width: 0; border-top-color: rgb(36, 36, 36); align-items: stretch; padding-top: 5px; padding-bottom: 1px; border-left-width: 0; border-right-width: 0; border-bottom-width: 0; display: flex;">
                 <ui:Label text="Node" style="max-width: 140px; min-width: 160px; flex-grow: 1; flex-basis: auto; -unity-font-style: bold; margin-left: 3px;" />
                 <ui:Label text=" Color" tooltip="Color of the header" style="flex-grow: 1; max-width: 80px; min-width: 90px; -unity-font-style: bold;" />
@@ -23,7 +23,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="baseNodesContainer" style="flex-grow: 1; display: flex;" />
             <ui:VisualElement name="extraNodeContainers" style="height: auto; flex-grow: 1; flex-shrink: 0; display: flex; visibility: visible;">
-                <ui:Label text="Main Nodes" tooltip="High level nodes that leafs derive from. This could be &apos;Decorator&apos; or &apos;Condition&apos;. If an override does not exist then the properties will be taken from here." class="debugger-header" />
+                <ui:Label text="Main Node Styles" tooltip="High level nodes that leafs derive from. This could be &apos;Decorator&apos; or &apos;Condition&apos;. If an override does not exist then the properties will be taken from here." class="debugger-header" />
                 <ui:VisualElement name="HeaderRow" style="flex-direction: row; flex-grow: 0; padding-left: 0; padding-right: 0; border-top-width: 0; border-top-color: rgb(36, 36, 36); align-items: stretch; padding-top: 5px; padding-bottom: 1px; border-left-width: 0; border-right-width: 0; border-bottom-width: 0; display: flex; visibility: visible;">
                     <ui:Label text="Node" style="max-width: 140px; min-width: 160px; flex-grow: 1; flex-basis: auto; -unity-font-style: bold; margin-left: 3px; visibility: visible;" />
                     <ui:Label text=" Color" tooltip="Color of the header" style="flex-grow: 1; max-width: 80px; min-width: 90px; -unity-font-style: bold; display: flex; visibility: visible; overflow: hidden;" />
@@ -34,7 +34,7 @@
                 <ui:VisualElement name="mainNodesContainer" style="flex-grow: 1;">
                     <uie:ObjectField name="mainNodeSelector" allow-scene-objects="false" style="width: 150px; margin-top: 5px;" />
                 </ui:VisualElement>
-                <ui:Label text="Overrides" tooltip="Any nodes you want to have specific look/feel for." class="debugger-header" />
+                <ui:Label text="Override Styles" tooltip="Any nodes you want to have specific look/feel for." class="debugger-header" />
                 <ui:VisualElement name="HeaderRow" style="flex-direction: row; flex-grow: 0; padding-left: 0; padding-right: 0; border-top-width: 0; border-top-color: rgb(36, 36, 36); align-items: stretch; padding-top: 5px; padding-bottom: 1px; border-left-width: 0; border-right-width: 0; border-bottom-width: 0; display: flex;">
                     <ui:Label text="Node" style="max-width: 140px; min-width: 160px; flex-grow: 1; flex-basis: auto; -unity-font-style: bold; margin-left: 3px;" />
                     <ui:Label text="Header Color" tooltip="Color of the header" style="flex-grow: 1; max-width: 80px; min-width: 90px; -unity-font-style: bold; visibility: hidden;" />

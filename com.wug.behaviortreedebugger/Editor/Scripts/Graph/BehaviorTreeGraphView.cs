@@ -59,6 +59,9 @@ namespace WUG.BehaviorTreeDebugger
 
         private Image CreateImage(Sprite imageIcon)
         {
+
+
+
             Image icon = new Image()
             {
                 style =
@@ -72,7 +75,11 @@ namespace WUG.BehaviorTreeDebugger
             };
 
             icon.tintColor = m_White;
-            icon.image = imageIcon.texture;
+
+            if (imageIcon != null)
+            {
+                icon.image = imageIcon.texture;
+            }
 
             return icon;
         }

@@ -185,17 +185,26 @@ namespace WUG.BehaviorTreeDebugger
             switch (status)
             {
                 case NodeStatus.Failure:
-                    m_StatusIcon.image = Settings.InvertResult ? BehaviorTreeGraphWindow.SettingsData.SuccessIcon.texture : BehaviorTreeGraphWindow.SettingsData.FailureIcon.texture;
+                    if (BehaviorTreeGraphWindow.SettingsData.FailureIcon != null && BehaviorTreeGraphWindow.SettingsData.SuccessIcon != null)
+                    {
+                        UpdateStatusIcon(Settings.InvertResult ? BehaviorTreeGraphWindow.SettingsData.SuccessIcon.texture : BehaviorTreeGraphWindow.SettingsData.FailureIcon.texture);
+                    }
                     m_NodeTitleContainer.style.backgroundColor = new StyleColor(Settings.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
 
                     break;
                 case NodeStatus.Success:
-                    m_StatusIcon.image = Settings.InvertResult ? BehaviorTreeGraphWindow.SettingsData.FailureIcon.texture : BehaviorTreeGraphWindow.SettingsData.SuccessIcon.texture;
+                    if (BehaviorTreeGraphWindow.SettingsData.FailureIcon != null && BehaviorTreeGraphWindow.SettingsData.SuccessIcon != null)
+                    {
+                        UpdateStatusIcon(Settings.InvertResult ? BehaviorTreeGraphWindow.SettingsData.FailureIcon.texture : BehaviorTreeGraphWindow.SettingsData.SuccessIcon.texture);
+                    }
                     m_NodeTitleContainer.style.backgroundColor = new StyleColor(Settings.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
 
                     break;
                 case NodeStatus.Running:
-                    m_StatusIcon.image = BehaviorTreeGraphWindow.SettingsData.RunningIcon.texture;
+                    if (BehaviorTreeGraphWindow.SettingsData.RunningIcon != null)
+                    {
+                        UpdateStatusIcon(BehaviorTreeGraphWindow.SettingsData.RunningIcon.texture);
+                    }
                     m_NodeTitleContainer.style.backgroundColor = new StyleColor(Settings.TitleBarColor.WithAlpha(1f));
 
                     ColorPorts(BehaviorTreeGraphWindow.SettingsData.BorderHighlightColor);
@@ -207,6 +216,16 @@ namespace WUG.BehaviorTreeDebugger
                     m_StatusIcon.style.visibility = Visibility.Hidden;
                     break;
             }
+        }
+
+        private void UpdateStatusIcon(Texture newImage)
+        {
+            if (newImage == null)
+            {
+                return;
+            }
+
+            m_StatusIcon.image = newImage;
         }
 
         private void ColorPorts(Color color)

@@ -15,8 +15,10 @@ namespace WUG.BehaviorTreeDebugger
 
     public class SettingsData : ScriptableObject
     {
-        public float DimLevel;
-        public Color BorderHighlightColor;
+        public static Color DefaultColor = new Color().FromRGB(24, 181, 233);
+
+        public float DimLevel = 127f;
+        public Color BorderHighlightColor = Color.green;
         public bool EnableMiniMap = false;
         public Sprite RunningIcon = null;
         public Sprite SuccessIcon = null;
@@ -30,7 +32,7 @@ namespace WUG.BehaviorTreeDebugger
         public class NodeProperty
         {
             public MonoScript Script = null;
-            public Color TitleBarColor = Color.black;
+            public Color TitleBarColor = DefaultColor;
             public Sprite Icon = null;
             public bool IsDecorator = false;
             public bool InvertResult = false;
