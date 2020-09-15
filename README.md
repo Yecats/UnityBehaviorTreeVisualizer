@@ -31,11 +31,6 @@ Here are the most important things to know:
 
 ### Example - Call OnNodeStatusChanged only when a new status or message occurs
 1. Your base class must inherit from the `NodeBase` class and implement `IBehaviorTree`.
-
-```csharp
-
-```
-
 2. Call `OnNodeStatusChanged` event when the node's status has been changed. In my example, I call it only if the all up status has changed (i.e. `Running` to `Success`) or if the `StatusReason` has changed. Here's an example:
 
 ``` csharp
