@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GraphView = UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
+using static WUG.BehaviorTreeDebugger.BehaviorTreeGraphView;
 
 namespace WUG.BehaviorTreeDebugger
 {
@@ -21,8 +22,8 @@ namespace WUG.BehaviorTreeDebugger
         public string Id;
         public Vector2 Position;
         public bool EntryPoint;
-        public NodeBase RuntimeNodeRef;
-        public SettingsData.NodeProperty Settings;
+        public FullNodeInfo MainNodeDetails;
+        private List<FullNodeInfo> m_DecoratorData;
 
         public GraphView.Port ParentPort;
 
@@ -31,21 +32,20 @@ namespace WUG.BehaviorTreeDebugger
 
         private VisualElement m_NodeBorder;
         private VisualElement m_NodeTitleContainer;
-        private Label m_NodeTopMessage;
+        private Label m_NodeTopMessageGeneral;
+        private Label m_NodeTopMessageDecorator;
         private Image m_StatusIcon;
 
         private Color m_defaultBorderColor = new Color(.098f, .098f, .098f);
         private Color m_White = new Color(255, 255, 255);
 
-        public BTGNodeData(NodeBase runtimeNodeRef, bool entryPoint, GraphView.Port parentPort, SettingsData.NodeProperty settings, List<SettingsData.NodeProperty> decoratorData)
+        public BTGNodeData(FullNodeInfo mainNodeDetails, bool entryPoint, GraphView.Port parentPort, List<FullNodeInfo> decoratorData)
         {
-            RuntimeNodeRef = runtimeNodeRef;
-            RuntimeNodeRef.NodeStatusChanged += OnNodeStatusChanged;
-            
+            MainNodeDetails = mainNodeDetails;
+            MainNodeDetails.RunTimeNode.NodeStatusChanged += OnNodeStatusChanged;
+            m_DecoratorData = decoratorData;
 
-            title = RuntimeNodeRef.Name == null || RuntimeNodeRef.Name.Equals("") ? RuntimeNodeRef.GetType().Name : RuntimeNodeRef.Name;
-
-            Settings = settings;
+            title = MainNodeDetails.RunTimeNode.Name == null || MainNodeDetails.RunTimeNode.Name.Equals("") ? MainNodeDetails.RunTimeNode.GetType().Name : MainNodeDetails.RunTimeNode.Name;
 
             Id = Guid.NewGuid().ToString();
             EntryPoint = entryPoint;
@@ -68,31 +68,19 @@ namespace WUG.BehaviorTreeDebugger
             m_NodeBorder = this.Q<VisualElement>("node-border");
             m_NodeTitleContainer = this.Q<VisualElement>("title");
 
-            m_NodeTitleContainer.style.backgroundColor = new StyleColor(Settings.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
+            m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
 
-            m_NodeTopMessage = new Label()
-            {
-                name = "errorReason",
-                style = {
-                    color = m_White,
-                    backgroundColor = new Color(.17f,.17f,.17f),
-                    flexWrap = Wrap.Wrap,
-                    paddingTop = 10,
-                    paddingBottom = 10,
-                    paddingLeft = 10,
-                    paddingRight = 10,
-                    display = DisplayStyle.None,
-                    whiteSpace = WhiteSpace.Normal
-                }
-            };
+            m_NodeTopMessageGeneral = GenerateStatusMessageLabel();
+            m_NodeTopMessageDecorator = GenerateStatusMessageLabel();
 
             //Add the decorator icon
-
-            if (decoratorData != null)
+            if (m_DecoratorData != null)
             {
-                foreach (var decorator in decoratorData)
+                foreach (var decorator in m_DecoratorData)
                 {
-                    Image decoratorImage = CreateDecoratorImage(decorator.Icon.texture);
+                    decorator.RunTimeNode.NodeStatusChanged += OnNodeStatusChanged;
+
+                    Image decoratorImage = CreateDecoratorImage(decorator.PropertyData.Icon.texture);
 
                     m_NodeTitleContainer.Add(decoratorImage);
                     decoratorImage.SendToBack();
@@ -100,13 +88,18 @@ namespace WUG.BehaviorTreeDebugger
                 }
             }
 
-            this.Q<VisualElement>("contents").Add(m_NodeTopMessage);
-            m_NodeTopMessage.SendToBack();
-        }
+            this.Q<VisualElement>("contents").Add(m_NodeTopMessageGeneral);
+            this.Q<VisualElement>("contents").Add(m_NodeTopMessageDecorator);
+            m_NodeTopMessageGeneral.SendToBack();
+            m_NodeTopMessageDecorator.SendToBack();
 
-        private void RuntimeNodeRef_NodeStatusChanged(NodeStatus status, string reason)
-        {
-            throw new NotImplementedException();
+            //Do an initial call to setup the style of the node in the event that it's already been running (pretty likely)
+            OnNodeStatusChanged(MainNodeDetails.RunTimeNode, MainNodeDetails.RunTimeNode.LastNodeStatus, MainNodeDetails.RunTimeNode.StatusReason);
+
+            if (m_DecoratorData != null)
+            {
+                m_DecoratorData.ForEach(x => OnNodeStatusChanged(x.RunTimeNode, x.RunTimeNode.LastNodeStatus, x.RunTimeNode.StatusReason));
+            }
         }
 
         private Image CreateDecoratorImage(Texture texture)
@@ -129,7 +122,32 @@ namespace WUG.BehaviorTreeDebugger
             return icon;
         }
 
+        /// <summary>
+        /// Generates a standard label used for messages
+        /// </summary>
+        /// <returns>Label with the proper style set</returns>
+        private Label GenerateStatusMessageLabel()
+        {
+           return new Label()
+            {
+                name = "errorReason",
+                style = {
+                    color = m_White,
+                    backgroundColor = new Color(.17f,.17f,.17f),
+                    flexWrap = Wrap.Wrap,
+                    paddingTop = 10,
+                    paddingBottom = 10,
+                    paddingLeft = 10,
+                    paddingRight = 10,
+                    display = DisplayStyle.None,
+                    whiteSpace = WhiteSpace.Normal
+                }
+            };
+        }
 
+        /// <summary>
+        /// Adds a port to the graph node
+        /// </summary>
         public void AddPort(GraphView.Port port, string name, bool isInputPort)
         {
             port.portColor = Color.white;
@@ -150,6 +168,9 @@ namespace WUG.BehaviorTreeDebugger
             RefreshPorts();
         }
 
+        /// <summary>
+        /// Generates a connection (edge) between graph nodes
+        /// </summary>
         public void GenerateEdge()
         {
             var tempEdge = new GraphView.Edge()
@@ -167,17 +188,32 @@ namespace WUG.BehaviorTreeDebugger
             RefreshPorts();
         }
 
-
-        private void OnNodeStatusChanged(NodeStatus status, string reason)
+        private void OnNodeStatusChanged(NodeBase sender, NodeStatus status, string reason)
         {
-            if (reason == "")
+            if (MainNodeDetails.RunTimeNode != sender)
             {
-                m_NodeTopMessage.style.display = DisplayStyle.None;
+                if (reason == "")
+                {
+                    m_NodeTopMessageDecorator.style.display = DisplayStyle.None;
+                }
+                else
+                {
+                    m_NodeTopMessageDecorator.style.display = DisplayStyle.Flex;
+                    m_NodeTopMessageDecorator.text = reason;
+                }
             }
             else
             {
-                m_NodeTopMessage.style.display = DisplayStyle.Flex;
-                m_NodeTopMessage.text = reason;
+                if (reason == "")
+                {
+                    m_NodeTopMessageGeneral.style.display = DisplayStyle.None;
+                }
+                else
+                {
+                    m_NodeTopMessageGeneral.style.display = DisplayStyle.Flex;
+                    m_NodeTopMessageGeneral.text = reason;
+                }
+
             }
 
             m_StatusIcon.style.visibility = Visibility.Visible;
@@ -189,17 +225,17 @@ namespace WUG.BehaviorTreeDebugger
                 case NodeStatus.Failure:
                     if (BehaviorTreeGraphWindow.SettingsData.FailureIcon != null && BehaviorTreeGraphWindow.SettingsData.SuccessIcon != null)
                     {
-                        UpdateStatusIcon(Settings.InvertResult ? BehaviorTreeGraphWindow.SettingsData.SuccessIcon.texture : BehaviorTreeGraphWindow.SettingsData.FailureIcon.texture);
+                        UpdateStatusIcon(MainNodeDetails.PropertyData.InvertResult ? BehaviorTreeGraphWindow.SettingsData.SuccessIcon.texture : BehaviorTreeGraphWindow.SettingsData.FailureIcon.texture);
                     }
-                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(Settings.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
+                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
 
                     break;
                 case NodeStatus.Success:
                     if (BehaviorTreeGraphWindow.SettingsData.FailureIcon != null && BehaviorTreeGraphWindow.SettingsData.SuccessIcon != null)
                     {
-                        UpdateStatusIcon(Settings.InvertResult ? BehaviorTreeGraphWindow.SettingsData.FailureIcon.texture : BehaviorTreeGraphWindow.SettingsData.SuccessIcon.texture);
+                        UpdateStatusIcon(MainNodeDetails.PropertyData.InvertResult ? BehaviorTreeGraphWindow.SettingsData.FailureIcon.texture : BehaviorTreeGraphWindow.SettingsData.SuccessIcon.texture);
                     }
-                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(Settings.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
+                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
 
                     break;
                 case NodeStatus.Running:
@@ -207,14 +243,14 @@ namespace WUG.BehaviorTreeDebugger
                     {
                         UpdateStatusIcon(BehaviorTreeGraphWindow.SettingsData.RunningIcon.texture);
                     }
-                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(Settings.TitleBarColor.WithAlpha(1f));
+                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(1f));
 
                     ColorPorts(BehaviorTreeGraphWindow.SettingsData.BorderHighlightColor);
                     RunningBorder();
 
                     break;
                 case NodeStatus.Unknown:
-                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(Settings.TitleBarColor.WithAlpha(1f));
+                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(1f));
                     m_StatusIcon.style.visibility = Visibility.Hidden;
                     break;
             }

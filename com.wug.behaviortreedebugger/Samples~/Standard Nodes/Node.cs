@@ -19,7 +19,7 @@ namespace WUG.BehaviorTreeDebugger
 
             if (LastNodeStatus != nodeStatus || !m_LastStatusReason.Equals(StatusReason))
             {
-                OnNodeStatusChanged(nodeStatus, StatusReason);
+                OnNodeStatusChanged(this, nodeStatus, StatusReason);
                 LastNodeStatus = nodeStatus;
                 m_LastStatusReason = StatusReason;
             }

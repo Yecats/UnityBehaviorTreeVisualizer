@@ -3,7 +3,7 @@
 namespace WUG.BehaviorTreeDebugger
 {
 
-    public delegate void NodeStatusChangedEventHandler(NodeStatus status, string reason);
+    public delegate void NodeStatusChangedEventHandler(NodeBase sender, NodeStatus status, string reason);
     public enum NodeStatus
     {
         Failure,
@@ -18,12 +18,13 @@ namespace WUG.BehaviorTreeDebugger
         public string StatusReason { get; set; } = "";
         public string m_LastStatusReason { get; set; } = "";
         public List<NodeBase> ChildNodes = new List<NodeBase>();
+        public NodeStatus LastNodeStatus = NodeStatus.NotRun;
 
         public event NodeStatusChangedEventHandler NodeStatusChanged;
 
-        protected virtual void OnNodeStatusChanged(NodeStatus status, string reason)
+        protected virtual void OnNodeStatusChanged(NodeBase sender, NodeStatus status, string reason)
         {
-            NodeStatusChanged?.Invoke(status, reason);
+            NodeStatusChanged?.Invoke(sender, status, reason);
         }
 
     }

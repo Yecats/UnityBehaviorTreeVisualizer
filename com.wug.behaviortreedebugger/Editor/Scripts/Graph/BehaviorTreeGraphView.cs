@@ -27,6 +27,12 @@ namespace WUG.BehaviorTreeDebugger
             public Port connectionPort;
         }
 
+        public struct FullNodeInfo
+        {
+            public NodeBase RunTimeNode;
+            public SettingsData.NodeProperty PropertyData;
+        }
+
         public BehaviorTreeGraphView()
         {
             SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
@@ -84,13 +90,17 @@ namespace WUG.BehaviorTreeDebugger
             return icon;
         }
 
-        public async void DrawNodes(bool entryPoint, NodeBase currentNode, int columnIndex, Port parentPort, StackNode stackNode, string[] styleClasses = null, List<SettingsData.NodeProperty> decoratorData = null)
+        public async void DrawNodes(bool entryPoint, NodeBase currentNode, int columnIndex, Port parentPort, StackNode stackNode, string[] styleClasses = null, List<FullNodeInfo> decoratorData = null)
         {
             int colIndex = columnIndex;
 
-            SettingsData.NodeProperty property = BehaviorTreeGraphWindow.SettingsData.GetNodePropertyDetails(currentNode);
+            FullNodeInfo fullDetails = new FullNodeInfo()
+            {
+                RunTimeNode = currentNode,
+                PropertyData = BehaviorTreeGraphWindow.SettingsData.GetNodePropertyDetails(currentNode)
+            };
 
-            if (property != null && property.IsDecorator)
+            if (fullDetails.PropertyData != null && fullDetails.PropertyData.IsDecorator)
             {
                 List<string> styles = new List<string>();
                 styles.Add("FirstNodeSpacing");
@@ -98,10 +108,10 @@ namespace WUG.BehaviorTreeDebugger
 
                 if (decoratorData == null)
                 {
-                    decoratorData = new List<SettingsData.NodeProperty>();
+                    decoratorData = new List<FullNodeInfo>();
                 }
 
-                decoratorData.Add(property);
+                decoratorData.Add(fullDetails);
 
                 if (currentNode.ChildNodes.Count == 0)
                 {
@@ -114,10 +124,11 @@ namespace WUG.BehaviorTreeDebugger
             }
             else
             {
-                BTGNodeData node = new BTGNodeData(currentNode, entryPoint, parentPort, property, decoratorData);
+
+                BTGNodeData node = new BTGNodeData(fullDetails, entryPoint, parentPort, decoratorData);
 
                 //Add general action image to title bar
-                Image nodeIcon = CreateImage(property.Icon);
+                Image nodeIcon = CreateImage(fullDetails.PropertyData.Icon);
                 node.titleContainer.Add(nodeIcon);
                 nodeIcon.SendToBack();
 
