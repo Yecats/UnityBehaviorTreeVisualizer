@@ -39,10 +39,10 @@ namespace WUG.BehaviorTreeDebugger
                         BehaviorTreeGraphWindow.SettingsData.SetDefaultStyle(value);
                         break;
                     case SettingNodeType.Main:
-                        BehaviorTreeGraphWindow.SettingsData.SetMainOrOverrideStyle("MainStyleProperties", m_Settings == null ? null : m_Settings.Script, value);
+                        BehaviorTreeGraphWindow.SettingsData.SetMainOrOverrideStyle("MainStyleProperties", value, m_Settings == null ? null : m_Settings.Script);
                         break;
                     case SettingNodeType.Override:
-                        BehaviorTreeGraphWindow.SettingsData.SetMainOrOverrideStyle("OverrideStyleProperties", m_Settings == null ? null : m_Settings.Script, value);
+                        BehaviorTreeGraphWindow.SettingsData.SetMainOrOverrideStyle("OverrideStyleProperties", value, m_Settings == null ? null : m_Settings.Script);
                         break;
                 }
 

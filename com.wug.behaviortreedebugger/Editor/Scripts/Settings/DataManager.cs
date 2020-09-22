@@ -60,7 +60,7 @@ public class DataManager
         {
             MonoScript script = property.GetArrayElementAtIndex(i).FindPropertyRelative("Script").objectReferenceValue as MonoScript;
 
-            if (script == originalScript || script == data.Script)
+            if (script == originalScript || script == newValue.Script)
             {
                 index = i;
                 break;
