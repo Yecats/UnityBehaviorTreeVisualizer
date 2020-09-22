@@ -68,7 +68,7 @@ namespace WUG.BehaviorTreeDebugger
             m_NodeBorder = this.Q<VisualElement>("node-border");
             m_NodeTitleContainer = this.Q<VisualElement>("title");
 
-            m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
+            m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.DataFile.DimLevel));
 
             m_NodeTopMessageGeneral = GenerateStatusMessageLabel();
             m_NodeTopMessageDecorator = GenerateStatusMessageLabel();
@@ -223,29 +223,29 @@ namespace WUG.BehaviorTreeDebugger
             switch (status)
             {
                 case NodeStatus.Failure:
-                    if (BehaviorTreeGraphWindow.SettingsData.FailureIcon != null && BehaviorTreeGraphWindow.SettingsData.SuccessIcon != null)
+                    if (BehaviorTreeGraphWindow.SettingsData.DataFile.FailureIcon != null && BehaviorTreeGraphWindow.SettingsData.DataFile.SuccessIcon != null)
                     {
-                        UpdateStatusIcon(MainNodeDetails.PropertyData.InvertResult ? BehaviorTreeGraphWindow.SettingsData.SuccessIcon.texture : BehaviorTreeGraphWindow.SettingsData.FailureIcon.texture);
+                        UpdateStatusIcon(MainNodeDetails.PropertyData.InvertResult ? BehaviorTreeGraphWindow.SettingsData.DataFile.SuccessIcon.texture : BehaviorTreeGraphWindow.SettingsData.DataFile.FailureIcon.texture);
                     }
-                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
+                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.DataFile.DimLevel));
 
                     break;
                 case NodeStatus.Success:
-                    if (BehaviorTreeGraphWindow.SettingsData.FailureIcon != null && BehaviorTreeGraphWindow.SettingsData.SuccessIcon != null)
+                    if (BehaviorTreeGraphWindow.SettingsData.DataFile.FailureIcon != null && BehaviorTreeGraphWindow.SettingsData.DataFile.SuccessIcon != null)
                     {
-                        UpdateStatusIcon(MainNodeDetails.PropertyData.InvertResult ? BehaviorTreeGraphWindow.SettingsData.FailureIcon.texture : BehaviorTreeGraphWindow.SettingsData.SuccessIcon.texture);
+                        UpdateStatusIcon(MainNodeDetails.PropertyData.InvertResult ? BehaviorTreeGraphWindow.SettingsData.DataFile.FailureIcon.texture : BehaviorTreeGraphWindow.SettingsData.DataFile.SuccessIcon.texture);
                     }
-                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
+                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.DataFile.DimLevel));
 
                     break;
                 case NodeStatus.Running:
-                    if (BehaviorTreeGraphWindow.SettingsData.RunningIcon != null)
+                    if (BehaviorTreeGraphWindow.SettingsData.DataFile.RunningIcon != null)
                     {
-                        UpdateStatusIcon(BehaviorTreeGraphWindow.SettingsData.RunningIcon.texture);
+                        UpdateStatusIcon(BehaviorTreeGraphWindow.SettingsData.DataFile.RunningIcon.texture);
                     }
                     m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(1f));
 
-                    ColorPorts(BehaviorTreeGraphWindow.SettingsData.BorderHighlightColor);
+                    ColorPorts(BehaviorTreeGraphWindow.SettingsData.DataFile.BorderHighlightColor);
                     RunningBorder();
 
                     break;
@@ -281,10 +281,10 @@ namespace WUG.BehaviorTreeDebugger
 
         private void RunningBorder()
         {
-            m_NodeBorder.style.borderLeftColor = BehaviorTreeGraphWindow.SettingsData.BorderHighlightColor;
-            m_NodeBorder.style.borderRightColor = BehaviorTreeGraphWindow.SettingsData.BorderHighlightColor;
-            m_NodeBorder.style.borderTopColor = BehaviorTreeGraphWindow.SettingsData.BorderHighlightColor;
-            m_NodeBorder.style.borderBottomColor = BehaviorTreeGraphWindow.SettingsData.BorderHighlightColor;
+            m_NodeBorder.style.borderLeftColor = BehaviorTreeGraphWindow.SettingsData.DataFile.BorderHighlightColor;
+            m_NodeBorder.style.borderRightColor = BehaviorTreeGraphWindow.SettingsData.DataFile.BorderHighlightColor;
+            m_NodeBorder.style.borderTopColor = BehaviorTreeGraphWindow.SettingsData.DataFile.BorderHighlightColor;
+            m_NodeBorder.style.borderBottomColor = BehaviorTreeGraphWindow.SettingsData.DataFile.BorderHighlightColor;
             m_NodeBorder.style.borderTopWidth = 2f;
             m_NodeBorder.style.borderRightWidth = 2f;
             m_NodeBorder.style.borderLeftWidth = 2f;

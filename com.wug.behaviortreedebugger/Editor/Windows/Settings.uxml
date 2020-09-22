@@ -3,8 +3,8 @@
         <Style src="/Packages/com.wug.behaviortreedebugger/Editor/Styles/BTGraphStyleSheet.uss" />
         <ui:ScrollView name="NodeScrollView" style="flex-grow: 1; flex-shrink: 1; justify-content: flex-start; min-height: auto; flex-basis: auto;">
             <ui:VisualElement name="About" style="flex-direction: row; min-width: 256px; min-height: 64px; background-color: rgb(56, 56, 56); border-left-color: rgb(91, 91, 91); border-right-color: rgb(91, 91, 91); border-top-color: rgb(91, 91, 91); border-bottom-color: rgb(91, 91, 91); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;">
-                <ui:VisualElement style="background-image: url(&apos;/Packages/com.wug.behaviortreedebugger/Editor//Sprites/wug_logo.png&apos;); min-width: 64px;" />
-                <ui:Label text="Behavior Tree Debugger (beta) was made by What Up Games, LLC.  Feature requests, feedback, and/or bugs can be filed at github.com/Yecats/UnityBehaviorTreeDebugger." style="flex-grow: 1; -unity-font-style: italic; white-space: normal; width: auto; flex-shrink: 1; -unity-text-align: middle-left; margin-left: 10px;" />
+                <ui:VisualElement style="background-image: url(&apos;/Packages/com.wug.behaviortreedebugger/Editor/Sprites/wug_logo.png&apos;); min-width: 64px;" />
+                <ui:Label text="Behavior Tree Debugger (beta) was made by What Up Games, LLC.  Feature requests, feedback, and/or bugs can be filed at github.com/Yecats/UnityBehaviorTreeDebugger." name="HeaderDescription" style="flex-grow: 1; -unity-font-style: italic; white-space: normal; width: auto; flex-shrink: 1; -unity-text-align: middle-left; margin-left: 10px;" />
             </ui:VisualElement>
             <ui:VisualElement style="flex-shrink: 0; flex-grow: 0; min-width: auto; height: auto;">
                 <ui:Label text="General" class="debugger-header" />

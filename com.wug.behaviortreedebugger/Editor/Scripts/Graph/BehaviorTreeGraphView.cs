@@ -30,7 +30,7 @@ namespace WUG.BehaviorTreeDebugger
         public struct FullNodeInfo
         {
             public NodeBase RunTimeNode;
-            public SettingsData.NodeProperty PropertyData;
+            public NodeProperty PropertyData;
         }
 
         public BehaviorTreeGraphView()
@@ -94,11 +94,17 @@ namespace WUG.BehaviorTreeDebugger
         {
             int colIndex = columnIndex;
 
-            FullNodeInfo fullDetails = new FullNodeInfo()
+            FullNodeInfo fullDetails = new FullNodeInfo();
+            fullDetails.RunTimeNode = currentNode;
+
+            //Loses reference for some reason
+            if (BehaviorTreeGraphWindow.SettingsData == null)
             {
-                RunTimeNode = currentNode,
-                PropertyData = BehaviorTreeGraphWindow.SettingsData.GetNodePropertyDetails(currentNode)
-            };
+                BehaviorTreeGraphWindow.SettingsData = new DataManager();
+            }
+
+            fullDetails.PropertyData = BehaviorTreeGraphWindow.SettingsData.GetNodeStyleDetails(currentNode);
+
 
             if (fullDetails.PropertyData != null && fullDetails.PropertyData.IsDecorator)
             {

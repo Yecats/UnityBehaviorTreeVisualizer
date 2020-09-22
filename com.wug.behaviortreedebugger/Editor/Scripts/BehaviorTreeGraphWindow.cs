@@ -23,11 +23,11 @@ namespace WUG.BehaviorTreeDebugger
         public static readonly string c_StylePath = $"{c_RootPath}/Resources/Styles/BTGraphStyleSheet.uss";
         public static readonly string c_SpritePath = $"{c_RootPath}/Sprites/";
 
-        public static SettingsData SettingsData;
         public static MiniMap MiniMap;
         public List<Type> ScriptsWithBehaviorTrees = new List<Type>();
 
         public static BehaviorTreeGraphView GraphView;
+        public static DataManager SettingsData;
         private ToolbarMenu m_ActiveTreesInScene;
         private List<UnityEngine.Object> m_SceneNodes = new List<UnityEngine.Object>();
         private SettingsWindow m_SettingsWindow;
@@ -35,6 +35,7 @@ namespace WUG.BehaviorTreeDebugger
         [MenuItem("What Up Games/Behavior Tree Debugger")]
         public static void Init()
         {
+            SettingsData = new DataManager();
             Instance = GetWindow<BehaviorTreeGraphWindow>();
             Instance.titleContent = new GUIContent("Behavior Tree Debugger (Beta)");
             Instance.minSize = new Vector2(500, 500);
@@ -42,7 +43,6 @@ namespace WUG.BehaviorTreeDebugger
 
         private void OnEnable()
         {
-            SettingsWindow.LoadSettingsFile();
             ConstructGraphView();
             GenerateToolBar();
             GenerateMiniMap();
@@ -64,7 +64,7 @@ namespace WUG.BehaviorTreeDebugger
             MiniMap.SetPosition(new Rect(10, 30, 200, 140));
             GraphView.Add(MiniMap);
 
-            ToggleMinimap(SettingsData.EnableMiniMap);
+            ToggleMinimap(SettingsData.DataFile.EnableMiniMap);
 
         }
 

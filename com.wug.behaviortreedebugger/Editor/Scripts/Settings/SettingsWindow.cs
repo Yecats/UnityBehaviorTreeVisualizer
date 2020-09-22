@@ -35,7 +35,7 @@ namespace WUG.BehaviorTreeDebugger
             m_FailureIcon = rootVisualElement.Q<ObjectField>("failureIcon");
             m_MainNode = rootVisualElement.Q<ObjectField>("mainNodeSelector");
             m_OverrideNode = rootVisualElement.Q<ObjectField>("overrideNodeSelector");
-            m_BaseNode = new SettingNodeRow(BehaviorTreeGraphWindow.SettingsData.BaseNodeProperties, SettingNodeType.Base);
+            m_BaseNode = new SettingNodeRow(BehaviorTreeGraphWindow.SettingsData.DataFile.DefaultStyleProperties, SettingNodeType.Base);
             m_MainNodesContainer = rootVisualElement.Q<VisualElement>("mainNodesContainer");
             m_OverrideNodesContainer = rootVisualElement.Q<VisualElement>("overridesContainer");
 
@@ -43,13 +43,16 @@ namespace WUG.BehaviorTreeDebugger
 
             m_MainNode.objectType = typeof(MonoScript);
             m_OverrideNode.objectType = typeof(MonoScript);
+            m_SuccessIcon.objectType = typeof(Sprite);
+            m_RunningIcon.objectType = typeof(Sprite);
+            m_FailureIcon.objectType = typeof(Sprite);
 
             m_MiniMap.RegisterValueChangedCallback((e) => { ToggleMiniMap(e.newValue); });
-            m_DimLevel.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.DimLevel = e.newValue; });
-            m_ColorField.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.BorderHighlightColor = e.newValue; });
-            m_SuccessIcon.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.UpdateNodeValue(e.newValue as Sprite, IconType.Success); });
-            m_RunningIcon.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.UpdateNodeValue(e.newValue as Sprite, IconType.Running); });
-            m_FailureIcon.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.UpdateNodeValue(e.newValue as Sprite, IconType.Failure); });
+            m_DimLevel.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.SetDimLevel(e.newValue); });
+            m_ColorField.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.SetBorderHighlightColor(e.newValue); });
+            m_SuccessIcon.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.UpdateGeneralcon(e.newValue as Sprite, IconType.Success); });
+            m_RunningIcon.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.UpdateGeneralcon(e.newValue as Sprite, IconType.Running); });
+            m_FailureIcon.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.UpdateGeneralcon(e.newValue as Sprite, IconType.Failure); });
             m_OverrideNode.RegisterValueChangedCallback((e) => 
             {
                 if (e.newValue != null)
@@ -77,11 +80,6 @@ namespace WUG.BehaviorTreeDebugger
 
         }
 
-        private void OnDestroy()
-        {
-            SaveSettings();
-        }
-
         /// <summary>
         /// Shows the Node Search modal window
         /// </summary>
@@ -92,76 +90,41 @@ namespace WUG.BehaviorTreeDebugger
         /// <param name="enabled">Whether the minimap should be visible or not</param>
         public static void ToggleMiniMap(bool enabled)
         {
-            BehaviorTreeGraphWindow.SettingsData.EnableMiniMap = enabled;
+            BehaviorTreeGraphWindow.SettingsData.SetMinimap(enabled);
             BehaviorTreeGraphWindow.Instance.ToggleMinimap(enabled);
         }
 
-        /// <summary>
-        /// Load the setting file
-        /// </summary>
-        public static void LoadSettingsFile()
-        {
-            SettingsData data = AssetDatabase.LoadAssetAtPath<SettingsData>($"{BehaviorTreeGraphWindow.c_DataPath}/settings.asset");
 
-            if (data == null)
-            {
-                BehaviorTreeGraphWindow.SettingsData = new SettingsData();
-                SaveSettings();
-            }
-            else
-            {
-                BehaviorTreeGraphWindow.SettingsData = data;
-            }
-        }
 
         /// <summary>
         /// Display the set properties on the settings screen
         /// </summary>
         private static void DisplaySettings()
         {
-            m_DimLevel.value = BehaviorTreeGraphWindow.SettingsData.DimLevel;
-            m_ColorField.value = BehaviorTreeGraphWindow.SettingsData.BorderHighlightColor;
-            m_MiniMap.value = BehaviorTreeGraphWindow.SettingsData.EnableMiniMap;
-            m_SuccessIcon.value = BehaviorTreeGraphWindow.SettingsData.SuccessIcon;
-            m_FailureIcon.value = BehaviorTreeGraphWindow.SettingsData.FailureIcon;
-            m_RunningIcon.value = BehaviorTreeGraphWindow.SettingsData.RunningIcon;
+            m_DimLevel.value = BehaviorTreeGraphWindow.SettingsData.DataFile.DimLevel;
+            m_ColorField.value = BehaviorTreeGraphWindow.SettingsData.DataFile.BorderHighlightColor;
+            m_MiniMap.value = BehaviorTreeGraphWindow.SettingsData.DataFile.EnableMiniMap;
+            m_SuccessIcon.value = BehaviorTreeGraphWindow.SettingsData.DataFile.SuccessIcon;
+            m_FailureIcon.value = BehaviorTreeGraphWindow.SettingsData.DataFile.FailureIcon;
+            m_RunningIcon.value = BehaviorTreeGraphWindow.SettingsData.DataFile.RunningIcon;
 
-            for (int i = 0; i < BehaviorTreeGraphWindow.SettingsData.OverrideNodeProperties.Count; i++)
+            for (int i = 0; i < BehaviorTreeGraphWindow.SettingsData.DataFile.OverrideStyleProperties.Count; i++)
             {
-                SettingNodeRow newRow = new SettingNodeRow(BehaviorTreeGraphWindow.SettingsData.OverrideNodeProperties[i], SettingNodeType.Override);
+                SettingNodeRow newRow = new SettingNodeRow(BehaviorTreeGraphWindow.SettingsData.DataFile.OverrideStyleProperties[i], SettingNodeType.Override);
 
                 m_OverrideNodesContainer.Add(newRow);
                 newRow.PlaceBehind(m_OverrideNode);
             }
 
-            for (int i = 0; i < BehaviorTreeGraphWindow.SettingsData.MainNodeProperties.Count; i++)
+            for (int i = 0; i < BehaviorTreeGraphWindow.SettingsData.DataFile.MainStyleProperties.Count; i++)
             {
-                SettingNodeRow newRow = new SettingNodeRow(BehaviorTreeGraphWindow.SettingsData.MainNodeProperties[i], SettingNodeType.Main);
+                SettingNodeRow newRow = new SettingNodeRow(BehaviorTreeGraphWindow.SettingsData.DataFile.MainStyleProperties[i], SettingNodeType.Main);
 
                 m_MainNodesContainer.Add(newRow);
                 newRow.PlaceBehind(m_MainNode);
             }
         }
 
-        /// <summary>
-        /// Checks for an existing settings file and if not found, creates one.
-        /// </summary>
-        private static void SaveSettings()
-        {
-            if (!AssetDatabase.IsValidFolder(BehaviorTreeGraphWindow.c_RootPathData))
-            {
-                AssetDatabase.CreateFolder("Assets", "Behavior Tree Debugger (Beta)");
-                AssetDatabase.CreateFolder(BehaviorTreeGraphWindow.c_RootPathData, "Resources");
-            }
-
-            if (!AssetDatabase.Contains(BehaviorTreeGraphWindow.SettingsData))
-            {
-                AssetDatabase.CreateAsset(BehaviorTreeGraphWindow.SettingsData, $"{BehaviorTreeGraphWindow.c_DataPath}/settings.asset");
-            }
-
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-        }
 
     }
 }
