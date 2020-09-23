@@ -197,6 +197,11 @@ public class DataManager
         return node;
     }
 
+    public float GetDimLevel()
+    {
+        return DataFile.DimLevel / 255;
+    }
+
     /// <summary>
     /// Save the settings scriptable object file
     /// </summary>
