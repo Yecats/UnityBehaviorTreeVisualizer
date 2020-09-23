@@ -35,9 +35,9 @@ Here are the most important things to know:
 ``` csharp
 if (LastNodeStatus != nodeStatus || !m_LastStatusReason.Equals(StatusReason))
 {
-    OnNodeStatusChanged(nodeStatus, StatusReason);
     LastNodeStatus = nodeStatus;
     m_LastStatusReason = StatusReason;
+    OnNodeStatusChanged(this);
 }
 ```
 ## Credits
