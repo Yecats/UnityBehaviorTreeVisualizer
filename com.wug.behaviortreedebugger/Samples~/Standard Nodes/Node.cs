@@ -8,7 +8,6 @@ namespace WUG.BehaviorTreeDebugger
         public int EvaluationCount;
         public bool DebugNodeStatus = false;
         public bool IsFirstEvaluation => EvaluationCount == 0;
-        private NodeStatus LastNodeStatus = NodeStatus.NotRun;
 
         /// <summary>
         /// Call on the base part of the Behavior tree to trigger the evaluation of all nodes
@@ -19,9 +18,9 @@ namespace WUG.BehaviorTreeDebugger
 
             if (LastNodeStatus != nodeStatus || !m_LastStatusReason.Equals(StatusReason))
             {
-                OnNodeStatusChanged(this, nodeStatus, StatusReason);
                 LastNodeStatus = nodeStatus;
                 m_LastStatusReason = StatusReason;
+		OnNodeStatusChanged(this);
             }
 
             EvaluationCount++;

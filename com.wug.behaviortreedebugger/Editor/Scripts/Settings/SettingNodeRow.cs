@@ -17,6 +17,7 @@ namespace WUG.BehaviorTreeDebugger
     public class SettingNodeRow : VisualElement
     {
         public static VisualTreeAsset rowTemplate;
+        public static Color DeactivatedColor = new Color().FromRGB(56, 56, 56, 255);
 
         private ObjectField m_NodeScript;
         private ColorField m_NodeColor;
@@ -97,6 +98,8 @@ namespace WUG.BehaviorTreeDebugger
                     original.IsDecorator = e.newValue;
                     Settings = original;
 
+                    ToggleColorField(!e.newValue);
+
                 });
                 m_InvertResult.RegisterValueChangedCallback((e) =>
                 {
@@ -117,7 +120,12 @@ namespace WUG.BehaviorTreeDebugger
             }
 
             //Set existing values
-            m_NodeColor.value = Settings.TitleBarColor;
+            ToggleColorField(!Settings.IsDecorator);
+
+            if (!Settings.IsDecorator)
+            {
+                m_NodeColor.value = Settings.TitleBarColor;
+            }
 
             if (Settings.Icon != null)
             {
@@ -151,6 +159,16 @@ namespace WUG.BehaviorTreeDebugger
             BehaviorTreeGraphWindow.SettingsData.RemoveMainOrOverrideStyle(styleType, Settings.Script);
 
             this.parent.Remove(this);
+        }
+
+        /// <summary>
+        /// Toggles the enabled state of the Color field. Should be used if the decorator checkbox is toggled
+        /// </summary>
+        /// <param name="enabled">Whether the field should be enabled</param>
+        private void ToggleColorField(bool enabled)
+        {
+            m_NodeColor.SetEnabled(enabled);
+            m_NodeColor.value = enabled ? DefaultColor : DeactivatedColor;
         }
 
     }
