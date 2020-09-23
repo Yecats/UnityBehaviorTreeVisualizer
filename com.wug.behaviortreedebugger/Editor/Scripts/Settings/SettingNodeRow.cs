@@ -36,13 +36,13 @@ namespace WUG.BehaviorTreeDebugger
                 switch (m_NodeType)
                 {
                     case SettingNodeType.Base:
-                        BehaviorTreeGraphWindow.SettingsData.UpdateBaseNodeProperty(value);
+                        BehaviorTreeGraphWindow.SettingsData.SetDefaultStyle(value);
                         break;
                     case SettingNodeType.Main:
-                        BehaviorTreeGraphWindow.SettingsData.UpdateMainNodeProperty(m_Settings == null ? null : m_Settings.Script, value);
+                        BehaviorTreeGraphWindow.SettingsData.SetMainOrOverrideStyle("MainStyleProperties", value, m_Settings == null ? null : m_Settings.Script);
                         break;
                     case SettingNodeType.Override:
-                        BehaviorTreeGraphWindow.SettingsData.UpdateOverrideNodeProperty(m_Settings == null ? null : m_Settings.Script, value);
+                        BehaviorTreeGraphWindow.SettingsData.SetMainOrOverrideStyle("OverrideStyleProperties", value, m_Settings == null ? null : m_Settings.Script);
                         break;
                 }
 
@@ -70,6 +70,9 @@ namespace WUG.BehaviorTreeDebugger
             m_isDecorator = this.Q<Toggle>("isDecorator");
             m_InvertResult = this.Q<Toggle>("invertResults");
 
+            m_NodeIcon.objectType = typeof(Sprite);
+            m_NodeScript.objectType = typeof(MonoScript);
+            
             if (nodeType == SettingNodeType.Base)
             {
                 m_NodeScript.parent.Remove(m_NodeScript);
@@ -143,15 +146,9 @@ namespace WUG.BehaviorTreeDebugger
 
         public void Delete_OnClick()
         {
-            switch (m_NodeType)
-            {
-                case SettingNodeType.Main:
-                    BehaviorTreeGraphWindow.SettingsData.RemoveMainNode(Settings.Script);
-                    break;
-                case SettingNodeType.Override:
-                    BehaviorTreeGraphWindow.SettingsData.RemoveOverrideNode(Settings.Script);
-                    break;
-            }
+            string styleType = m_NodeType == SettingNodeType.Main ? "MainStyleProperties" : "OverrideStyleProperties";
+
+            BehaviorTreeGraphWindow.SettingsData.RemoveMainOrOverrideStyle(styleType, Settings.Script);
 
             this.parent.Remove(this);
         }
