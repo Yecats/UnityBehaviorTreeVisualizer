@@ -68,7 +68,7 @@ namespace WUG.BehaviorTreeDebugger
             m_NodeBorder = this.Q<VisualElement>("node-border");
             m_NodeTitleContainer = this.Q<VisualElement>("title");
 
-            m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.DataFile.DimLevel));
+            m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
 
             m_NodeTopMessageGeneral = GenerateStatusMessageLabel();
             m_NodeTopMessageDecorator = GenerateStatusMessageLabel();
@@ -228,14 +228,14 @@ namespace WUG.BehaviorTreeDebugger
                     {
                         UpdateStatusIcon(MainNodeDetails.PropertyData.InvertResult ? BehaviorTreeGraphWindow.SettingsData.DataFile.SuccessIcon.texture : BehaviorTreeGraphWindow.SettingsData.DataFile.FailureIcon.texture);
                     }
-                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.DataFile.DimLevel));
+                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
                     break;
                 case NodeStatus.Success:
                     if (BehaviorTreeGraphWindow.SettingsData.DataFile.FailureIcon != null && BehaviorTreeGraphWindow.SettingsData.DataFile.SuccessIcon != null)
                     {
                         UpdateStatusIcon(MainNodeDetails.PropertyData.InvertResult ? BehaviorTreeGraphWindow.SettingsData.DataFile.FailureIcon.texture : BehaviorTreeGraphWindow.SettingsData.DataFile.SuccessIcon.texture);
                     }
-                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.DataFile.DimLevel));
+                    m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
                     break;
                 case NodeStatus.Running:
                     if (BehaviorTreeGraphWindow.SettingsData.DataFile.RunningIcon != null)
