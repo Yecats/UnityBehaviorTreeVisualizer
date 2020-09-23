@@ -1,6 +1,6 @@
 {
   "name": "com.wug.behaviortreedebugger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "Behavior Tree Debugger (Beta)",
   "description": "Note: The \"NPC Behavior Tree\" sample requires the \"Standard Nodes\" sample to be installed.\n\nBehavior Trees are a fantastic way to write modular AI that can scale in complexity. Unfortunately, it can be quite hard to visualize how your tree is being executed which makes it difficult to debug potential failure points. The Behavior Tree Debugger tool was created to solve these problems! The tool will scan for active behavior trees in your scene and group them in a drop down for easy toggle. A graph will be drawn, and nodes will light up, showing you which part of the tree is currently running.\n\nFeatures\n\n1. Customize the graph by choosing the title bar color, the icon, amount to dim inactive nodes and more.\r\n2. Robust debug messages can be viewed directly on the graph. Surface anything you want to see.\r\n3. Standard nodes to help you get up and running quickly. No need to write a sequencer, selector, inverter, or more!\n\nWhat's Included?\n\r\n1. Behavior Tree Debugger tool built with Unity Toolkit (formerly UI Elements)\r\n2. Standard Behavior Tree nodes to get you up and running quickly\r\n3. Sample project to demonstrate the implementation",
   "unity": "2020.1",
@@ -26,9 +26,14 @@
       "path": "Samples~/Standard Nodes"
     },
     {
-      "displayName": "NPC Behavior Tree",
+      "displayName": "NPC Behavior Tree - 2020.1",
       "description": "Simple behavior tree using standard nodes that controls an NPC who collects samples. Import the Standard Nodes sample to run this.",
-      "path": "Samples~/NPC Sample"
+      "path": "Samples~/NPC Sample 2020.1"
+    },
+    {
+      "displayName": "NPC Behavior Tree - 2019.4",
+      "description": "Simple behavior tree using standard nodes that controls an NPC who collects samples. Import the Standard Nodes sample to run this.",
+      "path": "Samples~/NPC Sample 2019.4"
     }
   ]
 }
