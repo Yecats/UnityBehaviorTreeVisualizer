@@ -27,7 +27,7 @@ namespace WUG.BehaviorTreeDebugger
             public Port connectionPort;
         }
 
-        public struct FullNodeInfo
+        public class FullNodeInfo
         {
             public NodeBase RunTimeNode;
             public NodeProperty PropertyData;

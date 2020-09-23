@@ -43,6 +43,12 @@ namespace WUG.BehaviorTreeDebugger
 
         private void OnEnable()
         {
+            //Loses reference for some reason
+            if (SettingsData == null)
+            {
+                SettingsData = new DataManager();
+            }
+
             ConstructGraphView();
             GenerateToolBar();
             GenerateMiniMap();

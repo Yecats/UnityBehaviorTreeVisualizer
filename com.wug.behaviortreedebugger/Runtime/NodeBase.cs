@@ -3,7 +3,7 @@
 namespace WUG.BehaviorTreeDebugger
 {
 
-    public delegate void NodeStatusChangedEventHandler(NodeBase sender, NodeStatus status, string reason);
+    public delegate void NodeStatusChangedEventHandler(NodeBase sender);
     public enum NodeStatus
     {
         Failure,
@@ -22,9 +22,9 @@ namespace WUG.BehaviorTreeDebugger
 
         public event NodeStatusChangedEventHandler NodeStatusChanged;
 
-        protected virtual void OnNodeStatusChanged(NodeBase sender, NodeStatus status, string reason)
+        protected virtual void OnNodeStatusChanged(NodeBase sender)
         {
-            NodeStatusChanged?.Invoke(sender, status, reason);
+            NodeStatusChanged?.Invoke(sender);
         }
 
     }
