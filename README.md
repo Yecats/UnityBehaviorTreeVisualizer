@@ -20,22 +20,16 @@ This package comes with:
 3. Sample project to demonstrate the implementation
 
 ## Setup
+To import the package into your project, you can either download the .zip from the **Releases** tab or [install through Package Manager](https://docs.unity3d.com/Manual/upm-ui-giturl.html) with this URL: https://github.com/Yecats/UnityBehaviorTreeDebugger.git?path=/com.wug.behaviortreedebugger. 
+
 Here are the most important things to know:
 
 1. Your base Node must inherit from `NodeBase` for the tool to pick up any running trees in your scene.
 2. Your node should call the `OnNodeStatusChanged` method when the node's status has been changed. This is what the tool listens to, to know which nodes should be highlighted, what their status is, and whether to draw any debug messages.
 3. By inheriting `NodeBase` all nodes will have the notion of child node(s). Do not add anything to the list, and it'll be ignored (and thus, treated as a leaf node). Decorators (inverter, untilfail, etc.) should only ever have one child and composites (seqencer, selector, etc.) can have as many as they need.
 
-### New Behavior Tree
-
-
 ### Example - Call OnNodeStatusChanged only when a new status or message occurs
-1. Your base class must inherit from the `NodeBase` class and implement `IBehaviorTree`.
-
-```csharp
-
-```
-
+1. Your base class must inherit from the `NodeBase` class.
 2. Call `OnNodeStatusChanged` event when the node's status has been changed. In my example, I call it only if the all up status has changed (i.e. `Running` to `Success`) or if the `StatusReason` has changed. Here's an example:
 
 ``` csharp
