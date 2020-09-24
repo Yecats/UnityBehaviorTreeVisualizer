@@ -20,7 +20,7 @@ namespace WUG.BehaviorTreeDebugger
             {
                 LastNodeStatus = nodeStatus;
                 m_LastStatusReason = StatusReason;
-		OnNodeStatusChanged(this);
+		        OnNodeStatusChanged(this);
             }
 
             EvaluationCount++;

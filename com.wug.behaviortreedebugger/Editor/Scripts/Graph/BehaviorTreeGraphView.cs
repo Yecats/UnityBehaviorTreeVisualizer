@@ -11,7 +11,6 @@ namespace WUG.BehaviorTreeDebugger
     public class BehaviorTreeGraphView : GraphView
     {
         public readonly Vector2 c_NodeSize = new Vector2(100, 150);
-        public readonly float c_NodePadding = 75;
         private Color m_White = new Color(255, 255, 255);
 
         private List<Edge> m_Edges => edges.ToList();
@@ -44,6 +43,9 @@ namespace WUG.BehaviorTreeDebugger
             var grid = new GridBackground();
             Insert(0, grid);
             grid.StretchToParentSize();
+
+            this.styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(BehaviorTreeGraphWindow.c_StylePath));
+
 
         }
 
@@ -108,9 +110,6 @@ namespace WUG.BehaviorTreeDebugger
 
             if (fullDetails.PropertyData != null && fullDetails.PropertyData.IsDecorator)
             {
-                List<string> styles = new List<string>();
-                styles.Add("FirstNodeSpacing");
-                styles.Add("LastNodeSpacing");
 
                 if (decoratorData == null)
                 {
@@ -125,7 +124,7 @@ namespace WUG.BehaviorTreeDebugger
                 }
                 else
                 {
-                    DrawNodes(false, currentNode.ChildNodes[0], colIndex, parentPort, stackNode, styles.ToArray(), decoratorData);
+                    DrawNodes(false, currentNode.ChildNodes[0], colIndex, parentPort, stackNode, null, decoratorData);
                 }
             }
             else
@@ -159,9 +158,12 @@ namespace WUG.BehaviorTreeDebugger
                         AddElement(node);
                     }
 
-                    foreach (string style in styleClasses)
+                    if (styleClasses != null)
                     {
-                        node.AddToClassList(style);
+                        foreach (string style in styleClasses)
+                        {
+                            node.AddToClassList(style);
+                        }
                     }
 
                 }
@@ -242,22 +244,22 @@ namespace WUG.BehaviorTreeDebugger
                     //Compare node size to previous one
                     float sizeDifference = previousStackNodeHeight - m_StackNodes[i].GetPosition().height;
 
-                    if (sizeDifference > 100)
+                    if (sizeDifference > 100 || sizeDifference < -100)
                     {
                         BTGNodeData[] nodes = m_StackNodes[i].childNodes.FindAll(x => x.ClassListContains("FirstNodeSpacing") || x.ClassListContains("LastNodeSpacing")).ToArray();
 
-                        int extraPadding = Mathf.RoundToInt(sizeDifference / nodes.Count());
+                        //int extraPadding = Mathf.RoundToInt(sizeDifference / nodes.Count());
 
                         foreach (BTGNodeData nodeData in nodes)
                         {
 
                             if (nodeData.ClassListContains("FirstNodeSpacing"))
                             {
-                                nodeData.style.paddingTop = 25 + extraPadding;
+                                nodeData.style.paddingTop = 25;// + extraPadding;
                             }
                             else
                             {
-                                nodeData.style.paddingBottom = 25 + extraPadding;
+                                nodeData.style.paddingBottom = 25;// + extraPadding;
                             }
                         }
 
