@@ -20,7 +20,7 @@ namespace WUG.BehaviorTreeDebugger
         public static readonly string c_RootPathData = "Assets/Behavior Tree Debugger (Beta)";
         public static readonly string c_WindowPath = $"{c_RootPath}/Windows/";
         public static readonly string c_DataPath = $"{c_RootPathData}/Resources";
-        public static readonly string c_StylePath = $"{c_RootPath}/Resources/Styles/BTGraphStyleSheet.uss";
+        public static readonly string c_StylePath = $"{c_RootPath}/Styles/BTGraphStyleSheet.uss";
         public static readonly string c_SpritePath = $"{c_RootPath}/Sprites/";
 
         public static MiniMap MiniMap;
@@ -39,6 +39,8 @@ namespace WUG.BehaviorTreeDebugger
             Instance = GetWindow<BehaviorTreeGraphWindow>();
             Instance.titleContent = new GUIContent("Behavior Tree Debugger (Beta)");
             Instance.minSize = new Vector2(500, 500);
+
+            Instance.rootVisualElement.styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(c_StylePath));
         }
 
         private void OnEnable()
