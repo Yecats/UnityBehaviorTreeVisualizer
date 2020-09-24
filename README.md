@@ -1,4 +1,4 @@
-![beta](https://img.shields.io/badge/release-beta-orange) ![GitHub issues](https://img.shields.io/github/issues/Yecats/UnityBehaviorTreeDebugger) ![version](https://img.shields.io/badge/unity%20version-2020.1.0f1%2B-blue) 
+![beta](https://img.shields.io/badge/release-beta-orange) ![GitHub issues](https://img.shields.io/github/issues/Yecats/UnityBehaviorTreeDebugger) ![version](https://img.shields.io/badge/unity%20version-2019.4%2B-blue) 
 
 ![twitter](https://img.shields.io/twitter/follow/yecats131?style=social) ![Twitter](https://img.shields.io/twitter/follow/whatupgames?style=social)
 
@@ -35,9 +35,9 @@ Here are the most important things to know:
 ``` csharp
 if (LastNodeStatus != nodeStatus || !m_LastStatusReason.Equals(StatusReason))
 {
-    OnNodeStatusChanged(nodeStatus, StatusReason);
     LastNodeStatus = nodeStatus;
     m_LastStatusReason = StatusReason;
+    OnNodeStatusChanged(this);
 }
 ```
 ## Credits
