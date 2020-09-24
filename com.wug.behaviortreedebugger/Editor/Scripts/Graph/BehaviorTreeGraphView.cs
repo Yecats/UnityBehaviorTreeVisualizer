@@ -248,22 +248,19 @@ namespace WUG.BehaviorTreeDebugger
                     {
                         BTGNodeData[] nodes = m_StackNodes[i].childNodes.FindAll(x => x.ClassListContains("FirstNodeSpacing") || x.ClassListContains("LastNodeSpacing")).ToArray();
 
-                        //int extraPadding = Mathf.RoundToInt(sizeDifference / nodes.Count());
-
                         foreach (BTGNodeData nodeData in nodes)
                         {
 
                             if (nodeData.ClassListContains("FirstNodeSpacing"))
                             {
-                                nodeData.style.paddingTop = 25;// + extraPadding;
+                                nodeData.style.paddingTop = 25;
                             }
                             else
                             {
-                                nodeData.style.paddingBottom = 25;// + extraPadding;
+                                nodeData.style.paddingBottom = 25;
                             }
                         }
 
-                        //await Task.Delay(100);
                         originalInfo = m_StackNodes[i].GetPosition();
 
                     }
