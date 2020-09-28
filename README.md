@@ -2,8 +2,8 @@
 
 ![twitter](https://img.shields.io/twitter/follow/yecats131?style=social) ![Twitter](https://img.shields.io/twitter/follow/whatupgames?style=social)
 
-# Unity Behavior Tree Debugger (Beta)
-Behavior Trees are a fantastic way to write modular AI that can scale in complexity. Unfortunately, it can be quite hard to visualize how your tree is being executed which makes it difficult to debug potential failure points. The Behavior Tree Debugger tool was created to solve these problems! The tool will scan for active behavior trees in your scene and group them in a drop down for easy toggle. A graph will be drawn, and nodes will light up, showing you which part of the tree is currently running. 
+# Unity Behavior Tree Visualizer (Beta)
+Behavior Trees are a fantastic way to write modular AI that can scale in complexity. Unfortunately, it can be quite hard to visualize how your tree is being executed which makes it difficult to debug potential failure points. The Behavior Tree Visualizer tool was created to solve these problems! The tool will scan for active behavior trees in your scene and group them in a drop down for easy toggle. A graph will be drawn, and nodes will light up, showing you which part of the tree is currently running. 
 
 > Head over to the [Wiki](https://github.com/Yecats/UnityBehaviorTreeDebugger/wiki) for more detailed documentation.
 
@@ -15,7 +15,7 @@ Behavior Trees are a fantastic way to write modular AI that can scale in complex
 ## What's Included?
 This package comes with:
 
-1. Behavior Tree Debugger tool built with Unity Toolkit (formerly UI Elements)
+1. Behavior Tree Visualizer tool built with Unity Toolkit (formerly UI Elements)
 2. Standard Behavior Tree nodes to get you up and running quickly
 3. Sample project to demonstrate the implementation
 
