@@ -2,7 +2,7 @@
 
 All notable changes to this package will be documented in this file.
 
-## [0.1.1] - 9-27-2020
+## [0.1.2] - 9-27-2020
 
 * Fixed a bug that was causing the layout to be drawn incorrectly (no spaces between sections).
 
