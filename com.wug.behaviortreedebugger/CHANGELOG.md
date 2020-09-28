@@ -2,6 +2,10 @@
 
 All notable changes to this package will be documented in this file.
 
+## [0.1.1] - 9-27-2020
+
+* Fixed a bug that was causing the layout to be drawn incorrectly (no spaces between sections).
+
 ## [0.1.1] - 9-23-2020
 
 * Added support for 2019.4 LTS for the sample projects
