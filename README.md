@@ -7,6 +7,8 @@ Behavior Trees are a fantastic way to write modular AI that can scale in complex
 
 > Head over to the [Wiki](https://github.com/Yecats/UnityBehaviorTreeDebugger/wiki) for more detailed documentation.
 
+![Example](https://github.com/Yecats/UnityBehaviorTreeVisualizer/blob/main/Wiki/Images/treeExample.gif)
+
 ## Features
 1. **Customize the graph** by choosing the title bar color, the icon, amount to dim inactive nodes and more.
 2. **Robust debug messages** can be viewed directly on the graph. Surface anything you want to see.
