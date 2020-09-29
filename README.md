@@ -37,7 +37,7 @@ Here are the most important things to know:
 2. Call `OnNodeStatusChanged` event when the node's status has been changed. In my example, I call it only if the all up status has changed (i.e. `Running` to `Success`) or if the `StatusReason` has changed. Here's an example:
 
 ``` csharp
-private string m_LastStatusReason { get; set; } ="";
+private string m_LastStatusReason;
 
 
 if (LastNodeStatus != nodeStatus || !m_LastStatusReason.Equals(StatusReason))
