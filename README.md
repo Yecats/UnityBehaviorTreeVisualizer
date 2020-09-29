@@ -27,8 +27,8 @@ https://github.com/Yecats/UnityBehaviorTreeVisualizer/tree/main/com.wug.behavior
 
 Here are the most important things to know:
 
-1. Your base Node must inherit from `NodeBase` for the tool to pick up any running trees in your scene.
-2. Your node should call the `OnNodeStatusChanged` method when the node's status has been changed. This is what the tool listens to, to know which nodes should be highlighted, what their status is, and whether to draw any debug messages.
+1. Your base Node must inherit from `NodeBase`.
+2. Your node should call the `OnNodeStatusChanged` method when the node's status code or reason has been changed. This is what the tool listens to, to know which nodes should be highlighted, what their status is, and whether to draw any debug messages.
 3. By inheriting `NodeBase` all nodes will have the notion of child node(s). Do not add anything to the list, and it'll be ignored (and thus, treated as a leaf node). Decorators (inverter, untilfail, etc.) should only ever have one child and composites (seqencer, selector, etc.) can have as many as they need.
 4. Your MonoBehavior that runs the behavior tree must implement 'IBehaviorTree'. The tool scans the running scene for all references to this interface.
 
