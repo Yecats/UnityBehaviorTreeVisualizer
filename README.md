@@ -23,7 +23,7 @@ This package comes with:
 
 ## Setup
 To import the package into your project, you can either download the .zip from the **Releases** tab or [install through Package Manager](https://docs.unity3d.com/Manual/upm-ui-giturl.html) with this URL: 
-https://github.com/Yecats/UnityBehaviorTreeVisualizer/tree/main/com.wug.behaviortreevisualizer
+https://github.com/Yecats/UnityBehaviorTreeDebugger.git?path=/com.wug.behaviortreevisualizer
 
 Here are the most important things to know:
 
