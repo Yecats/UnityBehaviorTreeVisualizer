@@ -2,9 +2,12 @@
 
 All notable changes to this package will be documented in this file.
 
-## [0.1.2] - 9-27-2020
+## [0.1.2] - 9-29-2020
 
 * Fixed a bug that was causing the layout to be drawn incorrectly (no spaces between sections).
+* Refactored to support new name.
+* Addressed minor warnings in the style sheet.
+* Removed `m_LastNodeStatus` from `NodeBase` as it is not required in all scenarios.
 
 ## [0.1.1] - 9-23-2020
 
