@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="Row" style="flex-direction: row; padding-top: 5px; padding-bottom: 0; padding-left: 1px; padding-right: 1px; flex-grow: 1; flex-shrink: 0;">
+        <Style src="/Packages/com.wug.behaviortreevisualizer/Editor/Styles/BTGraphStyleSheet.uss" />
+        <ui:VisualElement name="Container" style="flex-direction: row; align-items: center;">
+            <uie:ObjectField name="script" style="width: 150px;" />
+            <uie:ColorField value="RGBA(0.000, 1.000, 1.000, 1.000)" name="color" style="flex-grow: 1; max-width: 80px; min-width: 80px; margin-left: 10px;" />
+            <uie:ObjectField name="icon" type="UnityEngine.Sprite, UnityEngine.CoreModule" style="flex-grow: 1; max-width: 100px; min-width: 100px;" />
+            <ui:VisualElement name="imgPreview" style="max-width: 25px; min-width: 25px; max-height: 25px; min-height: 25px; padding-right: 0; margin-top: 0; margin-right: 10px; background-image: none;" />
+            <ui:Toggle name="isDecorator" style="margin-left: 25px; margin-right: 25px;" />
+            <ui:Toggle name="invertResults" style="margin-left: 25px; margin-right: 40px;" />
+        </ui:VisualElement>
+        <ui:Button text="-" name="btnDelete" style="flex-direction: row; flex-grow: 0; padding-left: 6px; margin-left: 15px;" />
+    </ui:VisualElement>
+</ui:UXML>

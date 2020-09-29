@@ -1,0 +1,124 @@
+.FirstNodeSpacing {
+    padding-top: 25px;
+}
+
+.LastNodeSpacing {
+    padding-bottom: 25px;
+}
+
+.titleSequence {
+    background-color: rgb(159, 0, 70);
+}
+
+.titleSelector {
+    background-color: rgb(159, 30, 0);
+}
+
+.titleDecorator {
+    background-color: rgb(0, 92, 156);
+    flex-direction: row;
+    justify-content: space-between;
+    height: 36px;
+}
+
+#title {
+    background-color: rgb(10, 140, 19);
+    flex-direction: row;
+    justify-content: space-between;
+    height: 36px;
+}
+
+.titleCondition {
+    background-color: rgb(159, 65, 0);
+}
+
+.titleLabel {
+    color: rgb(255, 255, 255);
+    -unity-font-style: Bold;
+}
+
+.header-label {
+    flex-grow: 1;
+    -unity-font-style: bold;
+    font-size: 12px;
+    padding-left: 5px;
+    padding-bottom: 0;
+    padding-top: 5px;
+    padding-right: 0;
+}
+
+.settings-button-list {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: rgba(93, 93, 93, 0);
+    -unity-text-align: middle-left;
+}
+
+.debugger-header {
+    font-size: 16px;
+    -unity-font-style: normal;
+    margin-bottom: 5px;
+    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-bottom-color: rgb(91, 91, 91);
+    border-bottom-width: 1px;
+    border-top-color: rgb(91, 91, 91);
+    border-top-width: 0;
+    margin-top: 10px;
+}
+
+.blackboardHeader {
+    flex-direction: row;
+    background-color: rgb(57, 57, 57);
+    border-left-color: rgb(33, 33, 33);
+    border-right-color: rgb(33, 33, 33);
+    border-top-color: rgb(33, 33, 33);
+    border-bottom-color: rgb(33, 33, 33);
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    color: rgb(210, 210, 210);
+    border-bottom-width: 1px;
+    padding-left: 1px;
+    padding-top: 4px;
+    padding-bottom: 2px;
+    align-items: center;
+}
+
+.blackboard-main {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left-color: rgb(25, 25, 25);
+    border-right-color: rgb(25, 25, 25);
+    border-top-color: rgb(25, 25, 25);
+    border-bottom-color: rgb(25, 25, 25);
+    background-color: rgb(43, 43, 43);
+}
+
+.runtime-row-highlight {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-left-color: rgb(0, 255, 6);
+    border-right-color: rgb(0, 255, 6);
+    border-top-color: rgb(0, 255, 6);
+    border-bottom-color: rgb(0, 255, 6);
+}
