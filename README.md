@@ -48,4 +48,4 @@ if (LastNodeStatus != nodeStatus || !m_LastStatusReason.Equals(StatusReason))
 }
 ```
 ## Credits
-1. This project uses icons from https://game-icons.net/.
+1. This project uses icons from https://game-icons.net/
