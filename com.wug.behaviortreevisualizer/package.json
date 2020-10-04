@@ -26,6 +26,11 @@
       "path": "Samples~/Standard Nodes"
     },
     {
+      "displayName": "Community Nodes",
+      "description": "Collection of behavior tree nodes contributed by the community. Go to <a href=\"https://github.com/Yecats/UnityBehaviorTreeVisualizer/wiki/Community-Nodes\">Community Nodes Wiki</a> for more details.",
+      "path": "Samples~/Community Nodes"
+    },    
+    {
       "displayName": "NPC Behavior Tree - 2020.1",
       "description": "Simple behavior tree using standard nodes that controls an NPC who collects samples. Import the Standard Nodes sample to run this.",
       "path": "Samples~/NPC Sample 2020.1"
