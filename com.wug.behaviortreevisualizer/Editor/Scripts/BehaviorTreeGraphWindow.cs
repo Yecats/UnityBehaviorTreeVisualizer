@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -41,6 +42,29 @@ namespace WUG.BehaviorTreeVisualizer
             Instance.minSize = new Vector2(500, 500);
 
             Instance.rootVisualElement.styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(c_StylePath));
+        }
+
+        /// <summary>
+        /// Gives focus to the behavior tree window 
+        /// </summary>
+        /// <param name="behaviorTree"></param>
+        public static void DrawBehaviorTree(NodeBase behaviorTree, bool focusWindow)
+        {
+            // If this window is not open then nothing will be done
+            if (!HasOpenInstances<BehaviorTreeGraphWindow>())
+            {
+                return;
+            }
+
+            //focus the window if that's what is desired
+            if (focusWindow)
+            {
+                FocusWindowIfItsOpen(typeof(BehaviorTreeGraphWindow));
+            }
+            
+            //Clears any existing nodes that have been drawn and loads the tree
+            GraphView.ClearTree();
+            GraphView.LoadBehaviorTree(behaviorTree);
         }
 
         private void OnEnable()

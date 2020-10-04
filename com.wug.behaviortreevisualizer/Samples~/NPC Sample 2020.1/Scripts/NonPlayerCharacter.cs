@@ -80,5 +80,16 @@ namespace WUG.BehaviorTreeVisualizer
                                         new Idle()),
                                     new SetNavigationActivityTo(NavigationActivity.PickupItem)));
         }
+
+        public void ForceDrawingOfTree()
+        {
+            if (BehaviorTree == null)
+            {
+                $"Behavior tree is null - nothing to draw.".BTDebugLog();
+            }
+
+            BehaviorTreeGraphWindow.DrawBehaviorTree(BehaviorTree, true);
+        }
+                
     }
 }
