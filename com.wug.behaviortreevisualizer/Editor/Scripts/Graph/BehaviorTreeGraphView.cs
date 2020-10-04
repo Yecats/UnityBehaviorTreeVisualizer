@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEditor;
@@ -47,6 +48,52 @@ namespace WUG.BehaviorTreeVisualizer
             this.styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(BehaviorTreeGraphWindow.c_StylePath));
 
 
+        }
+
+        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
+        {
+            base.BuildContextualMenu(evt);
+
+            if (evt.target is BTGNodeData)
+            {
+                BTGNodeData nodeData = (evt.target as BTGNodeData);
+
+                int countOfItems = 1;
+
+                for (int i = 0; i < nodeData.DecoratorData.Count; i++)
+                {
+                    var name = nodeData.DecoratorData[0].RunTimeNode.GetType().Name;
+
+                    evt.menu.InsertAction(0, $"Open {name}", (e) => { OpenFile($"{name}.cs"); });
+                    
+                    countOfItems++;
+                }
+
+                string nodeName = nodeData.MainNodeDetails.RunTimeNode.GetType().Name;
+                evt.menu.InsertAction(0, $"Open {nodeName}", (e) => { OpenFile($"{nodeName}.cs"); });
+
+                evt.menu.InsertSeparator("", countOfItems);
+            }
+        }
+
+        /// <summary>
+        /// Open a file at a specified location
+        /// </summary>
+        /// <param name="className">Class name with extension</param>
+        private void OpenFile(string className)
+        {
+
+            string[] res = Directory.GetFiles(Application.dataPath, className, SearchOption.AllDirectories);
+
+            if (res.Length == 0)
+            {
+                $"Unable to locate script path. Please file a bug at https://github.com/Yecats/UnityBehaviorTreeVisualizer".BTDebugLog();
+                return;
+            }
+
+            string path = res[0].Replace("\\", "/");
+
+            UnityEditorInternal.InternalEditorUtility.OpenFileAtLineExternal(path, 1, 0);
         }
 
         public void ClearTree()
@@ -120,7 +167,7 @@ namespace WUG.BehaviorTreeVisualizer
 
                 if (currentNode.ChildNodes.Count == 0)
                 {
-                    $"Decorator ({currentNode.GetType().Name}) does not have any children. Nothing will be drawn".BTDebugLog();
+                    $"Decorator ({currentNode.GetType().Name}) does not have any children. Nothing will be drawn.".BTDebugLog();
                 }
                 else
                 {

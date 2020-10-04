@@ -2,6 +2,12 @@
 
 All notable changes to this package will be documented in this file.
 
+## [0.1.3] - 10-04-2020
+
+* [#21](https://github.com/Yecats/UnityBehaviorTreeVisualizer/issues/21) You can now right click on a graph node to launch any of the scripts it represents.
+* [#18](https://github.com/Yecats/UnityBehaviorTreeVisualizer/issues/18) & [#15](https://github.com/Yecats/UnityBehaviorTreeVisualizer/issues/15) Added a hook so that you can request a redraw of the graph. Useful for dynamic trees or to add an inspector button (now included in the samples).
+* [#20](https://github.com/Yecats/UnityBehaviorTreeVisualizer/issues/20) Added a **Community Nodes** sample folder so that anyone can contribute behavior tree nodes! Also added a node - NavigateToDestination, which will take a GameObject or NavMeshAgent and position reference and handle movement.
+
 ## [0.1.2] - 9-29-2020
 
 * Fixed a bug that was causing the layout to be drawn incorrectly (no spaces between sections).
