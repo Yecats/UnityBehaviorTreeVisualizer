@@ -19,15 +19,15 @@ namespace WUG.BehaviorTreeVisualizer
     [Serializable]
     public class BTGNodeData : GraphView.Node
     {
-        public string Id;
-        public Vector2 Position;
-        public bool EntryPoint;
-        public FullNodeInfo MainNodeDetails;
-        private List<FullNodeInfo> m_DecoratorData;
+        public string Id { get; private set; }
+        public Vector2 Position { get; private set; }
+        public bool EntryPoint { get; private set; }
+        public FullNodeInfo MainNodeDetails { get; private set; }
+        public List<FullNodeInfo> DecoratorData { get; private set; }
 
-        public GraphView.Port ParentPort;
+        public GraphView.Port ParentPort { get; private set; }
 
-        public GraphView.Port InputPort;
+        public GraphView.Port InputPort { get; private set; }
         public List<GraphView.Port> OutputPorts = new List<GraphView.Port>();
 
         private VisualElement m_NodeBorder;
@@ -42,7 +42,7 @@ namespace WUG.BehaviorTreeVisualizer
         public BTGNodeData(FullNodeInfo mainNodeDetails, bool entryPoint, GraphView.Port parentPort, List<FullNodeInfo> decoratorData)
         {
             MainNodeDetails = mainNodeDetails;
-            m_DecoratorData = decoratorData;
+            DecoratorData = decoratorData;
             MainNodeDetails.RunTimeNode.NodeStatusChanged += OnNodeStatusChanged;
 
             title = MainNodeDetails.RunTimeNode.Name == null || MainNodeDetails.RunTimeNode.Name.Equals("") ? MainNodeDetails.RunTimeNode.GetType().Name : MainNodeDetails.RunTimeNode.Name;
@@ -74,9 +74,9 @@ namespace WUG.BehaviorTreeVisualizer
             m_NodeTopMessageDecorator = GenerateStatusMessageLabel();
 
             //Add the decorator icon
-            if (m_DecoratorData != null)
+            if (DecoratorData != null)
             {
-                foreach (var decorator in m_DecoratorData)
+                foreach (var decorator in DecoratorData)
                 {
                     decorator.RunTimeNode.NodeStatusChanged += OnNodeStatusChanged;
 
@@ -96,9 +96,9 @@ namespace WUG.BehaviorTreeVisualizer
             //Do an initial call to setup the style of the node in the event that it's already been running (pretty likely)
             OnNodeStatusChanged(MainNodeDetails.RunTimeNode);
 
-            if (m_DecoratorData != null)
+            if (DecoratorData != null)
             {
-                m_DecoratorData.ForEach(x => OnNodeStatusChanged(x.RunTimeNode));
+                DecoratorData.ForEach(x => OnNodeStatusChanged(x.RunTimeNode));
             }
 
         }
