@@ -60,13 +60,16 @@ namespace WUG.BehaviorTreeVisualizer
 
                 int countOfItems = 1;
 
-                for (int i = 0; i < nodeData.DecoratorData.Count; i++)
+                if (nodeData.DecoratorData != null)
                 {
-                    var name = nodeData.DecoratorData[0].RunTimeNode.GetType().Name;
+                    for (int i = 0; i < nodeData.DecoratorData.Count; i++)
+                    {
+                        var name = nodeData.DecoratorData[0].RunTimeNode.GetType().Name;
 
-                    evt.menu.InsertAction(0, $"Open {name}", (e) => { OpenFile($"{name}.cs"); });
-                    
-                    countOfItems++;
+                        evt.menu.InsertAction(0, $"Open {name}", (e) => { OpenFile($"{name}.cs"); });
+
+                        countOfItems++;
+                    }
                 }
 
                 string nodeName = nodeData.MainNodeDetails.RunTimeNode.GetType().Name;
