@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using WUG.BehaviorTreeVisualizer;
 
-namespace Assets.Samples.Behavior_Tree_Visualizer__Beta_._0._1._2.NPC_Behavior_Tree___2019._4.Scripts.Editor
+namespace WUG.BehaviorTreeVisualizer
 {
     [CustomEditor(typeof(NonPlayerCharacter))]
     public class NonplayerCharacterEditor : UnityEditor.Editor
