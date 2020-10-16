@@ -2,6 +2,12 @@
 
 All notable changes to this package will be documented in this file.
 
+## [0.1.4] - 10-16-2020
+
+* [#24](https://github.com/Yecats/UnityBehaviorTreeVisualizer/issues/24) Added a new Decorator Node called "Delay". It will run a timer before running the child node once.
+* [#25](https://github.com/Yecats/UnityBehaviorTreeVisualizer/issues/25) Added a new setting option to display the last evaluated timestamp on the Node. This is on by default.
+* Removed the irrelevant default options on the context menu of the graph.
+
 ## [0.1.3] - 10-04-2020
 
 * [#21](https://github.com/Yecats/UnityBehaviorTreeVisualizer/issues/21) You can now right click on a graph node to launch any of the scripts it represents.

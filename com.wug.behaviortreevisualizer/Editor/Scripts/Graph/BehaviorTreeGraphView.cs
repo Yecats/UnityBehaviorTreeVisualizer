@@ -52,7 +52,9 @@ namespace WUG.BehaviorTreeVisualizer
 
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
-            base.BuildContextualMenu(evt);
+            //TODO: This will need to be a toggle once creating behavior trees is supported
+            //      It's not needed for viewnig and can cause negative behavior
+            //base.BuildContextualMenu(evt);
 
             if (evt.target is BTGNodeData)
             {

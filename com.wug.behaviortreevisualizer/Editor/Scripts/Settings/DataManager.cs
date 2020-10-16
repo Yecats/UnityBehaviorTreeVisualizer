@@ -96,6 +96,17 @@ public class DataManager
     /// <summary>
     /// Set the dim level of inactive drawn nodes
     /// </summary>
+    public void SetLastEvalTimeStamp(bool newValue)
+    {
+        m_SettingsRef.FindProperty("LastRunTimeStamp").boolValue = newValue;
+
+        SaveSettingsFile();
+    }
+
+
+    /// <summary>
+    /// Set the dim level of inactive drawn nodes
+    /// </summary>
     public void SetDimLevel(float newValue)
     {
         m_SettingsRef.FindProperty("DimLevel").floatValue = newValue;

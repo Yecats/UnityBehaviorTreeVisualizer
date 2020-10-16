@@ -20,6 +20,7 @@ namespace WUG.BehaviorTreeVisualizer
         public float DimLevel = 127f;
         public Color BorderHighlightColor = Color.green;
         public bool EnableMiniMap = false;
+        public bool LastRunTimeStamp = true;
         public Sprite RunningIcon = null;
         public Sprite SuccessIcon = null;
         public Sprite FailureIcon = null;

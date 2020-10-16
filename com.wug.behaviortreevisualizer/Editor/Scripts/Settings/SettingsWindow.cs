@@ -11,6 +11,7 @@ namespace WUG.BehaviorTreeVisualizer
         private static Slider m_DimLevel;
         private static ColorField m_ColorField;
         private static Toggle m_MiniMap;
+        private static Toggle m_LastTimestamp;
         private static ObjectField m_SuccessIcon;
         private static ObjectField m_RunningIcon;
         private static ObjectField m_FailureIcon;
@@ -28,6 +29,7 @@ namespace WUG.BehaviorTreeVisualizer
             m_DimLevel = rootVisualElement.Q<Slider>("Slider_Inactive_Dim");
             m_ColorField = rootVisualElement.Q<ColorField>("clr_BorderHighlight");
             m_MiniMap = rootVisualElement.Q<Toggle>("bool_MiniMap");
+            m_LastTimestamp = rootVisualElement.Q<Toggle>("bool_LastEvalTimestamp");
             m_SuccessIcon = rootVisualElement.Q<ObjectField>("successIcon");
             m_RunningIcon = rootVisualElement.Q<ObjectField>("runningIcon");
             m_FailureIcon = rootVisualElement.Q<ObjectField>("failureIcon");
@@ -46,6 +48,7 @@ namespace WUG.BehaviorTreeVisualizer
             m_FailureIcon.objectType = typeof(Sprite);
 
             m_MiniMap.RegisterValueChangedCallback((e) => { ToggleMiniMap(e.newValue); });
+            m_LastTimestamp.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.SetLastEvalTimeStamp(e.newValue); });
             m_DimLevel.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.SetDimLevel(e.newValue); });
             m_ColorField.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.SetBorderHighlightColor(e.newValue); });
             m_SuccessIcon.RegisterValueChangedCallback((e) => { BehaviorTreeGraphWindow.SettingsData.UpdateGeneralcon(e.newValue as Sprite, IconType.Success); });
@@ -102,6 +105,7 @@ namespace WUG.BehaviorTreeVisualizer
             m_DimLevel.value = BehaviorTreeGraphWindow.SettingsData.DataFile.DimLevel;
             m_ColorField.value = BehaviorTreeGraphWindow.SettingsData.DataFile.BorderHighlightColor;
             m_MiniMap.value = BehaviorTreeGraphWindow.SettingsData.DataFile.EnableMiniMap;
+            m_LastTimestamp.value = BehaviorTreeGraphWindow.SettingsData.DataFile.LastRunTimeStamp;
             m_SuccessIcon.value = BehaviorTreeGraphWindow.SettingsData.DataFile.SuccessIcon;
             m_FailureIcon.value = BehaviorTreeGraphWindow.SettingsData.DataFile.FailureIcon;
             m_RunningIcon.value = BehaviorTreeGraphWindow.SettingsData.DataFile.RunningIcon;

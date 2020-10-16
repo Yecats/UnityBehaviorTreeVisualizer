@@ -34,6 +34,7 @@ namespace WUG.BehaviorTreeVisualizer
         private VisualElement m_NodeTitleContainer;
         private Label m_NodeTopMessageGeneral;
         private Label m_NodeTopMessageDecorator;
+        private Label m_NodeLastEvaluatedTimeStamp;
         private Image m_StatusIcon;
 
         private Color m_defaultBorderColor = new Color(.098f, .098f, .098f);
@@ -70,8 +71,9 @@ namespace WUG.BehaviorTreeVisualizer
 
             m_NodeTitleContainer.style.backgroundColor = new StyleColor(MainNodeDetails.PropertyData.TitleBarColor.WithAlpha(BehaviorTreeGraphWindow.SettingsData.GetDimLevel()));
 
-            m_NodeTopMessageGeneral = GenerateStatusMessageLabel();
-            m_NodeTopMessageDecorator = GenerateStatusMessageLabel();
+            m_NodeTopMessageGeneral = GenerateStatusMessageLabel("generalStatusMessage" , DisplayStyle.None);
+            m_NodeTopMessageDecorator = GenerateStatusMessageLabel("decoratorReason", DisplayStyle.None);
+            m_NodeLastEvaluatedTimeStamp = GenerateStatusMessageLabel("lastEvalTimeStamp", DisplayStyle.None);
 
             //Add the decorator icon
             if (DecoratorData != null)
@@ -90,6 +92,8 @@ namespace WUG.BehaviorTreeVisualizer
 
             this.Q<VisualElement>("contents").Add(m_NodeTopMessageGeneral);
             this.Q<VisualElement>("contents").Add(m_NodeTopMessageDecorator);
+            this.Q<VisualElement>("contents").Add(m_NodeLastEvaluatedTimeStamp);
+            m_NodeLastEvaluatedTimeStamp.SendToBack();
             m_NodeTopMessageGeneral.SendToBack();
             m_NodeTopMessageDecorator.SendToBack();
 
@@ -127,11 +131,11 @@ namespace WUG.BehaviorTreeVisualizer
         /// Generates a standard label used for messages
         /// </summary>
         /// <returns>Label with the proper style set</returns>
-        private Label GenerateStatusMessageLabel()
+        private Label GenerateStatusMessageLabel(string name, DisplayStyle display)
         {
            return new Label()
             {
-                name = "errorReason",
+                name = name,
                 style = {
                     color = m_White,
                     backgroundColor = new Color(.17f,.17f,.17f),
@@ -140,7 +144,7 @@ namespace WUG.BehaviorTreeVisualizer
                     paddingBottom = 10,
                     paddingLeft = 10,
                     paddingRight = 10,
-                    display = DisplayStyle.None,
+                    display = display,
                     whiteSpace = WhiteSpace.Normal
                 }
             };
@@ -191,6 +195,12 @@ namespace WUG.BehaviorTreeVisualizer
 
         private void OnNodeStatusChanged(NodeBase sender)
         {
+            if (BehaviorTreeGraphWindow.SettingsData.DataFile.LastRunTimeStamp)
+            {
+                m_NodeLastEvaluatedTimeStamp.text = $"Last evaluated at {DateTime.Now:h:mm:ss:fff tt}";
+                m_NodeLastEvaluatedTimeStamp.style.display = DisplayStyle.Flex;
+            }
+
             if (MainNodeDetails.RunTimeNode != sender)
             {
                 if (sender.StatusReason == "")
