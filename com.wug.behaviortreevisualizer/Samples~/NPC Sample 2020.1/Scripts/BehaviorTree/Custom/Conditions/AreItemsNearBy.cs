@@ -9,7 +9,6 @@ namespace WUG.BehaviorTreeVisualizer
         /// <summary>
         /// Checks to see if an item is a specific distance from the player
         /// </summary>
-        /// <param name="player">GameObject that represents the starting position</param>
         /// <param name="maxDistance">Max distance from the player game object to scan for</param>
         public AreItemsNearBy(float maxDistance) : base($"Are Items within {maxDistance}f?") 
         { 
