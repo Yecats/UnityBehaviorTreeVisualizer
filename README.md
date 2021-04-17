@@ -2,7 +2,7 @@
 
 ![twitter](https://img.shields.io/twitter/follow/yecats131?style=social) ![Twitter](https://img.shields.io/twitter/follow/whatupgames?style=social)
 
-> Want to learn the fundamentals of behavior trees? Check out my tutorial, [Get Started With Behavior Trees in Unity](https://yecats.github.io/2020/11/16/Get-started-with-behavior-trees.html).
+> Want to learn the fundamentals of behavior trees? Check out my tutorial, [Get Started With Behavior Trees in Unity](https://gamedev-resources.com/ai/301/).
 
 # Unity Behavior Tree Visualizer (Beta)
 Behavior Trees are a fantastic way to write modular AI that can scale in complexity. Unfortunately, it can be quite hard to visualize how your tree is being executed which makes it difficult to debug potential failure points. The Behavior Tree Visualizer tool was created to solve these problems! The tool will scan for active behavior trees in your scene and group them in a drop down for easy toggle. A graph will be drawn, and nodes will light up, showing you which part of the tree is currently running. 
